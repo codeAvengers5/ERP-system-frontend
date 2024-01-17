@@ -9,6 +9,6 @@
 module.exports = {
   eslint: {
     ignoreDuringBuilds: false,
-    dirs: ["app"] // Only run ESLint on the 'pages' and 'utils' directories during production builds (next build)
+    dirs: ["src"] // Only run ESLint on the 'src' directory during production builds (next build)
   }
 };
