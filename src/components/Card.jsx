@@ -1,10 +1,10 @@
 import React from "react";
 const Displaycard = ({
-variant="default",
-width,
-height,
- className,
-style
+  variant = "default",
+  width,
+  height,
+  className,
+  style
 }) => {
   const baseProps = {
     className: "flex "
@@ -16,13 +16,13 @@ style
     selectedProps = {
       width: "1036px",
       height: "365px",
-      className: `${baseProps.className}  bg-sky-50 `
+      className: `${baseProps.className}  bg-[#F0F9FF]  `
     };
   } else if (variant === "card2") {
     selectedProps = {
       width: "580.38px",
       height: "730.05px",
-      className: `${baseProps.className}  bg-indigo-50 rounded-[1px]  `,
+      className: `${baseProps.className}  bg-meke-300 rounded-[1px] `,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
     };
   } else if (variant === "card3") {
@@ -41,7 +41,7 @@ style
     selectedProps = {
       width: "580px",
       height: "411.257px",
-      className: `${baseProps.className}  relative bg-indigo-50 rounded-sm`,
+      className: `${baseProps.className} relative bg-meke-300 rounded-sm`,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
     };
   } else if (variant === "card6") {
@@ -55,7 +55,7 @@ style
     selectedProps = {
       width: "448px",
       height: "597px",
-      className: `  bg-white`,
+      className: ` bg-white`,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
     };
   }
