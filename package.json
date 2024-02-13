@@ -12,9 +12,9 @@
 
     "build": "next build",
 
-    "lint:js": "eslint 'src/**/*.{js,jsx}' --quiet",
+    "lint:js": "eslint src/**/*.js --quiet",
 
-    "lint:js:fix": "eslint . --fix 'src/**/*.{js,jsx}' --quiet",
+    "lint:js:fix": "eslint src --fix --quiet",
 
     "lint:css": "stylelint **/*.{scss,css}",
 
