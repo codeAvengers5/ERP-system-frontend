@@ -34,7 +34,7 @@ export const BasicForm = ({ fields, onSubmit, btnText, className }) => {
       selectedFile: selectedFile
     };
     onSubmit(formDataAll);
-    console.log('form data',formData)
+    console.log("form data", formData);
   };
 
   return (
@@ -108,15 +108,18 @@ export const AdditionalForm = ({ fields, onSubmit, btnText, className }) => {
 
   const handleFileChange = e => {
     const files = Array.from(e.target.files);
-    setSelectedFiles((prevSelectedFiles) => [...prevSelectedFiles, ...files.map((file) => URL.createObjectURL(file))]);
-   console.log('file',files)
+    setSelectedFiles(prevSelectedFiles => [
+      ...prevSelectedFiles,
+      ...files.map(file => URL.createObjectURL(file))
+    ]);
+    console.log("file", files);
   };
 
-  const handlePreviewLoad = (index) => {
+  const handlePreviewLoad = index => {
     URL.revokeObjectURL(selectedFiles[index]); // free memory
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -124,7 +127,7 @@ export const AdditionalForm = ({ fields, onSubmit, btnText, className }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const formDataAll = {
       ...formData,
@@ -208,21 +211,22 @@ export const AdditionalForm = ({ fields, onSubmit, btnText, className }) => {
                   </label>
                 </div>
                 <div className="mt-[15px] flex justify-center gap-[30px]">
-                {selectedFiles ? (
-                  selectedFiles.map((file, index) => (
-                    <img
-                      key={index}
-                      src={file}
-                      onLoad={() => handlePreviewLoad(index)}
-                      alt="Preview"
-                      className="h-[135px] w-[140px] object-cover"
-                    />
-                  )))
-                  :
-                  (
-                  <><div className="h-[135px] w-[140px] bg-meke-600"/>
-                  <div className="h-[135px] w-[140px] bg-meke-600"/></>)
-                }
+                  {selectedFiles ? (
+                    selectedFiles.map((file, index) => (
+                      <img
+                        key={index}
+                        src={file}
+                        onLoad={() => handlePreviewLoad(index)}
+                        alt="Preview"
+                        className="h-[135px] w-[140px] object-cover"
+                      />
+                    ))
+                  ) : (
+                    <>
+                      <div className="h-[135px] w-[140px] bg-meke-600" />
+                      <div className="h-[135px] w-[140px] bg-meke-600" />
+                    </>
+                  )}
                 </div>
               </div>
             )}
