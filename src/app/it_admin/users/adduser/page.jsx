@@ -57,7 +57,7 @@ const page = () => {
       <Displaycard variant="card2">
         <FormWrapper onSubmit={handleSubmit}>
           <div>
-            <Text className="pb-[14px]" content="Name Of Employee" />
+            <Text className="pb-[5px] md:pb-[10px]" content="Name Of Employee" />
             <InputField
               type="text"
               placeholder="Enter full name of employee"
@@ -67,7 +67,7 @@ const page = () => {
             />
           </div>
           <div>
-            <Text className="pb-[14px]" content="Email" />
+            <Text className="pb-[5px] md:pb-[10px]" content="Email" />
             <InputField
               type="text"
               placeholder="Enter email of the employee"
@@ -77,7 +77,7 @@ const page = () => {
             />
           </div>
           <div>
-            <Text className="pb-[14px]" content="Password" />
+            <Text className="pb-[5px] md:pb-[10px]" content="Password" />
             <InputField
               type="password"
               placeholder="Enter default password for the employee"
@@ -97,7 +97,7 @@ const page = () => {
             />
           </div>
           <div>
-            <Text className="pb-[14px]" content="Salary/Wage" />
+            <Text className="pb-[5px] md:pb-[10px]" content="Salary/Wage" />
             <InputField
               type="text"
               placeholder="Enter salary of the employee"
@@ -107,7 +107,7 @@ const page = () => {
             />
           </div>
           <div>
-            <Text className="pb-[14px]" content="Gender" />
+            <Text className="pb-[5px] md:pb-[10px]" content="Gender" />
             <CustomSelect
               data={data}
               name="gender"
@@ -115,12 +115,12 @@ const page = () => {
               onSelect={onInputChange}
             />
           </div>
-          <div className="w-[550px]">
+          <div className="w-[300px] md:w-[550px]">
             <Text
-              className="pb-[14px]"
+              className="pb-[5px] md:pb-[10px]"
               content="Image of National ID/ License ID"
             />
-            <div className="flex w-full flex-row items-center rounded border-2 border-br_primary bg-bg_primary px-4 py-2 hover:bg-bt_primary hover:opacity-[25%]">
+            <div className="flex w-full items-center rounded border-2 border-br_primary bg-bg_primary px-2 md:px-4 py-2 hover:bg-bt_primary hover:opacity-[25%]">
               <input
                 type="file"
                 id="custom-input"
@@ -132,7 +132,7 @@ const page = () => {
               />
               <label
                 htmlFor="custom-input"
-                className="mr-[200px] block cursor-pointer rounded-md border-0 px-4
+                className="mr-[20px] md:mr-[200px] block cursor-pointer rounded-md border-0 px-4
                   py-2 text-sm 
                  text-tx_addtional">
                 Choose file
@@ -141,7 +141,7 @@ const page = () => {
                 You can add multiple image
               </label>
             </div>
-            <div className="mt-[15px] flex justify-center gap-[30px]">
+            <div className="mt-[15px] flex flex-col justify-center items-center md:flex-row gap-[15px] md:gap-[30px]">
               {imagebox ? (
                 selectedFiles.map((file, index) => (
                   <img
@@ -149,7 +149,7 @@ const page = () => {
                     src={file}
                     onLoad={() => handlePreviewLoad(index)}
                     alt="Preview"
-                    className="h-[135px] w-[140px] object-cover"
+                    className="h-[67px] w-[70px] md:h-[135px] md:w-[140px] object-cover"
                   />
                 ))
               ) : (
@@ -160,7 +160,7 @@ const page = () => {
               )}
             </div>
           </div>
-          <div className="col-span-2">
+          <div className="col-span-1 md:col-span-2">
             <Button color="bt_primary" type="submit">
               submit
             </Button>

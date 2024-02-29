@@ -6,7 +6,7 @@ const FormWrapper = ({ onSubmit, children, className }) => {
       onSubmit={onSubmit}
       className={
         className ||
-        "grid w-full grid-cols-2 gap-x-[100px] gap-y-[15px] p-4 md:w-[580px] md:max-w-full"
+        "grid grid-cols-1 md:grid-cols-2 grid-flow-row gap-x-[50px] md:gap-x-[100px] gap-y-[15px] p-4 max-w-full"
       }>
       {children}
     </form>
