@@ -7,21 +7,24 @@ import FormWrapper from "@/components/FormWrapper";
 import InputField from "@/components/InputField";
 import Text from "@/components/TextField";
 import { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 
 const initialState = {
   nameOfEmployee: "",
   email: "",
   password: "",
   position: "",
+  role: "",
+  workStartDate: new Date(),
   salary: "",
   gender: "",
-  nationalId: [],
+  nationalId: []
 };
 
 const page = () => {
   const [user, setUser] = useState(initialState);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [imagebox , setImageBox] = useState(false);
+  const [imagebox, setImageBox] = useState(false);
 
   const handleSelectFile = e => {
     setImageBox(true);
@@ -30,7 +33,7 @@ const page = () => {
       ...prevSelectedFiles,
       ...files.map(file => URL.createObjectURL(file))
     ]);
-  
+
     setUser({ ...user, nationalId: [...user.nationalId, ...files] });
   };
 
@@ -38,7 +41,6 @@ const page = () => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
-
 
   const handlePreviewLoad = index => {
     URL.revokeObjectURL(selectedFiles[index]); // free memory
@@ -50,14 +52,18 @@ const page = () => {
     setUser(initialState);
   };
 
-  const data = ["male", "female"];
+  const genderdata = ["Male", "Female"];
+  const roledata = ["HR", "Manager", "Employee"];
 
   return (
     <div className="flex justify-center">
       <Displaycard variant="card2">
         <FormWrapper onSubmit={handleSubmit}>
           <div>
-            <Text className="pb-[5px] md:pb-[10px]" content="Name Of Employee" />
+            <Text
+              className="pb-[5px] md:pb-[10px]"
+              content="Name Of Employee"
+            />
             <InputField
               type="text"
               placeholder="Enter full name of employee"
@@ -97,6 +103,25 @@ const page = () => {
             />
           </div>
           <div>
+            <Text className="pb-[14px]" content="Role" />
+            <CustomSelect
+              data={roledata}
+              title="Select role"
+              name="role"
+              onChange={onInputChange}
+            />
+          </div>
+          <div>
+            <Text className="pb-[14px]" content="Work start date" />
+            <InputField
+              type="date"
+              placeholder="Enter occupation of the employee"
+              name="workStartDate"
+              value={user.workStartDate}
+              onChange={onInputChange}
+            />
+          </div>
+          <div>
             <Text className="pb-[5px] md:pb-[10px]" content="Salary/Wage" />
             <InputField
               type="text"
@@ -109,7 +134,7 @@ const page = () => {
           <div>
             <Text className="pb-[5px] md:pb-[10px]" content="Gender" />
             <CustomSelect
-              data={data}
+              data={genderdata}
               name="gender"
               title="Select gender"
               onSelect={onInputChange}
@@ -120,7 +145,7 @@ const page = () => {
               className="pb-[5px] md:pb-[10px]"
               content="Image of National ID/ License ID"
             />
-            <div className="flex w-full items-center rounded border-2 border-br_primary bg-bg_primary px-2 md:px-4 py-2 hover:bg-bt_primary hover:opacity-[25%]">
+            <div className="flex w-full items-center rounded border-2 border-br_primary bg-bg_primary px-2 py-2 hover:bg-bt_primary hover:opacity-[25%] md:px-4">
               <input
                 type="file"
                 id="custom-input"
@@ -132,16 +157,16 @@ const page = () => {
               />
               <label
                 htmlFor="custom-input"
-                className="mr-[20px] md:mr-[200px] block cursor-pointer rounded-md border-0 px-4
-                  py-2 text-sm 
-                 text-tx_addtional">
+                className="mr-[20px] block cursor-pointer rounded-md border-0 px-4 py-2
+                  text-sm text-tx_addtional 
+                 md:mr-[200px]">
                 Choose file
               </label>
               <label className="text-sm text-tx_addtional">
                 You can add multiple image
               </label>
             </div>
-            <div className="mt-[15px] flex flex-col justify-center items-center md:flex-row gap-[15px] md:gap-[30px]">
+            <div className="mt-[15px] flex flex-col items-center justify-center gap-[15px] md:flex-row md:gap-[30px]">
               {imagebox ? (
                 selectedFiles.map((file, index) => (
                   <img
@@ -149,7 +174,7 @@ const page = () => {
                     src={file}
                     onLoad={() => handlePreviewLoad(index)}
                     alt="Preview"
-                    className="h-[67px] w-[70px] md:h-[135px] md:w-[140px] object-cover"
+                    className="h-[67px] w-[70px] object-cover md:h-[135px] md:w-[140px]"
                   />
                 ))
               ) : (
