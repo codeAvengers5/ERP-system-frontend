@@ -48,7 +48,6 @@ const page = () => {
       </div>
       <div className="flex max-w-full flex-col md:flex-row gap-x-[100px] ">
         <FormWrapper className="max-w-[470px] flex flex-col gap-y-[30px] justify-center" onSubmit={handleSubmit}>
-        {/* <div className="max-w-[470px] flex flex-col gap-y-[30px] justify-center"> */}
           <div>
           <Text className="text-meke-900 text-heading_1 md:text-[64px] font-medium font-primary" content="Hello Again!" />
           <Text className="text-meke-900 text-sm md:text-base font-light font-primary" content="please sign in to your account" />
@@ -85,7 +84,6 @@ const page = () => {
               <Link href="/" className="text-tx_link text-sm">Forgotpassowrd?</Link>
             </div>
             <Button color="bt_primary" size="large">Login</Button>
-        {/* </div> */}
         </FormWrapper>
         <div className="max-w-[700px] max-h-[700px] ">
         <Image src={login_banner} alt="login_banner" className="w-full" />
