@@ -7,7 +7,6 @@ import FormWrapper from "@/components/FormWrapper";
 import InputField from "@/components/InputField";
 import Text from "@/components/TextField";
 import { useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
 
 const initialState = {
   nameOfEmployee: "",
