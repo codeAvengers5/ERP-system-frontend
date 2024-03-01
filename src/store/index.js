@@ -1,14 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-import rootReducer from '../slices';
+import { configureStore } from '@reduxjs/toolkit'
+import authReducer from "./slices/auth";
+import messageReducer from "./slices/message";
 
-const store = configureStore({ reducer: rootReducer });
+const reducer = {
+  auth: authReducer,
+  message: messageReducer
+}
 
-export const AppDispatch = store.dispatch;
-export const AppThunk = (thunkAction) => {
-  return thunkAction;
-};
-
-export const useAppDispatch = () => useDispatch(AppDispatch);
+const store = configureStore({
+  reducer: reducer,
+  devTools: true,
+})
 
 export default store;
