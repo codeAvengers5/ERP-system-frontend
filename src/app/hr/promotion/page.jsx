@@ -1,14 +1,9 @@
 import React from "react";
 import Image from "../../../../node_modules/next/image";
-import manager1 from "../../../../public/images/Rectangle1.png";
-import manager2 from "../../../../public/images/Rectangle2.png";
-import manager3 from "../../../../public/images/Rectangle3.png";
-import edit from "../../../../public/icons/edit.svg";
-import delet from "../../../../public/icons/delete.svg";
-import filter from "../../../../public/icons/mi_filter.svg";
+import { manager1, manager2, manager3 } from "../../../../public/images/index";
+import { edit, delet, filter, pulss } from "../../../../public/icons/index";
 import Displaycard from "@/components/Card";
 import Button from "@/components/Button";
-import pluss from "../../../../public/icons/plus.svg";
 const page = () => {
   const buttonStyle = {
     width: "200px",
