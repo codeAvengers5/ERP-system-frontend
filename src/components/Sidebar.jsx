@@ -179,15 +179,15 @@ const Sidebar = ({ currentPage }) => {
   return (
     <div className="relative h-[1024px] w-1/6 overflow-hidden bg-[#f5f8fa]">
       <div className="absolute left-[0px] top-[0px] h-[1024px] w-full bg-[#cbd4de]" />
-      <div className="shadow-xl absolute left-[0px] top-[0px] h-[111px] w-full bg-[#FFFFFF]">
-      <div className="font-inter absolute left-[65px] top-[24px] inline-block h-[45px] w-[191px] text-3xl font-semibold text-[#17A1FA]">
-        Mekedoina
-      </div>
-      <img
-        className="absolute left-[20px] top-[30px] h-[35px] w-[35px] rounded-[50%] object-cover"
-        alt="logo"
-        src="/icons/logo.svg"
-      />
+      <div className="absolute left-[0px] top-[0px] h-[111px] w-full bg-[#FFFFFF] shadow-xl">
+        <div className="font-inter absolute left-[65px] top-[24px] inline-block h-[45px] w-[191px] text-3xl font-semibold text-[#17A1FA]">
+          Mekedoina
+        </div>
+        <img
+          className="absolute left-[20px] top-[30px] h-[35px] w-[35px] rounded-[50%] object-cover"
+          alt="logo"
+          src="/icons/logo.svg"
+        />
       </div>
       <nav className="absolute left-[35px] top-[130px]">
         <ul>
