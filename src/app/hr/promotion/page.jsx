@@ -1,7 +1,8 @@
+"use client";
 import React from "react";
 import Image from "../../../../node_modules/next/image";
 import { manager1, manager2, manager3 } from "../../../../public/images/index";
-import { edit, delet, filter, pulss } from "../../../../public/icons/index";
+import { edit, delet, filter } from "../../../../public/icons/index";
 import Displaycard from "@/components/Card";
 import Button from "@/components/Button";
 const page = () => {
