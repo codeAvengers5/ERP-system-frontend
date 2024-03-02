@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "../../../../node_modules/next/image";
 import { manager1, manager2, manager3 } from "../../../../public/images/index";
-import { edit, delet, filter } from "../../../../public/icons/index";
+import { edit, delet, filter, plus } from "../../../../public/icons/index";
 import Displaycard from "@/components/Card";
 import Button from "@/components/Button";
 const page = () => {
@@ -41,7 +41,7 @@ const page = () => {
           <div className=" flex  items-center justify-center gap-[39px] px-[15px]">
             <div className="h-6 w-6">
               {" "}
-              <Image src={pluss} alt="plus" />
+              <Image src={plus} alt="plus" />
             </div>
             <div className="font-['Roboto'] text-2xl font-normal text-white">
               Add News
