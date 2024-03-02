@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, { Component } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -30,8 +29,8 @@ export default class NextJsCarousel extends Component {
     return (
       <div className="mx-auto">
         <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-          <Displaycard margin="20px" paddingTop={40}>
-            <div className="flex flex-col items-center justify-center gap-7">
+          <Displaycard margin="50px" paddingTop={40}>
+            <div className="mx-4 flex flex-col items-center justify-center gap-7">
               <div className="relative h-0 w-full pb-[75%] md:mx-[15%] md:h-[0] md:w-[50%] md:pb-[39%] lg:mx-[20%] lg:h-[298px] lg:w-[380px]">
                 <Carousel
                   showIndicators={false}
@@ -86,7 +85,7 @@ export default class NextJsCarousel extends Component {
             </div>
           </Displaycard>
 
-          <Displaycard margin="20px" paddingTop={40}>
+          <Displaycard margin="50px" paddingTop={40}>
             <div className="flex flex-col items-center justify-center gap-7">
               <div className="relative h-0 w-full pb-[75%] md:mx-[15%] md:h-[0] md:w-[50%] md:pb-[39%] lg:mx-[20%] lg:h-[298px] lg:w-[380px]">
                 <Carousel
@@ -151,8 +150,11 @@ export default class NextJsCarousel extends Component {
               News For Employee
             </p>
             <p className="font-Roboto text-base font-normal leading-tight text-black md:text-lg">
-              Tomorrow There will be a meeting held in the second adarsh. Be
-              there at 2:30 in the morning.
+              Tomorrow There will be a meeting held in the second adarsh.
+              Bethere at 2:30 in the morning.We would like to thank Mr. Getnat
+              Tadese, the CEO of the Ethiopian Press Organization, and the
+              management members and staff of the Press Organization.the
+              management members and staff of the Press .
             </p>
           </div>
         </Displaycard>
