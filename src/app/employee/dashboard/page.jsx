@@ -30,7 +30,7 @@ export default class NextJsCarousel extends Component {
         <div className="flex flex-col gap-4 md:flex-row md:gap-4">
           <Displaycard margin="50px" paddingTop={40}>
             <div className="mx-4 flex flex-col items-center justify-center gap-7">
-              <div className="relative h-0 w-[50%] pb-[75%] md:mx-[15%] md:h-[0] md:w-full md:pb-[39%] lg:mx-[20%] lg:h-[298px] max-w-[380px]">
+              <div className="relative h-0 w-[50%] max-w-[380px] pb-[75%] md:mx-[15%] md:h-[0] md:w-full md:pb-[39%] lg:mx-[20%] lg:h-[298px]">
                 <Carousel
                   showIndicators={false}
                   showThumbs={false}
@@ -86,7 +86,7 @@ export default class NextJsCarousel extends Component {
 
           <Displaycard margin="50px" paddingTop={40}>
             <div className="flex flex-col items-center justify-center gap-7">
-              <div className="relative h-0 w-[50%] pb-[75%] md:mx-[15%] md:h-[0] md:w-full md:pb-[39%] lg:mx-[20%] lg:h-[298px] max-w-[380px]">
+              <div className="relative h-0 w-[50%] max-w-[380px] pb-[75%] md:mx-[15%] md:h-[0] md:w-full md:pb-[39%] lg:mx-[20%] lg:h-[298px]">
                 <Carousel
                   showIndicators={false}
                   showThumbs={false}

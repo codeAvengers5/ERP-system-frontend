@@ -10,7 +10,7 @@ const Navbar = () => {
     setInputVisible(!isInputVisible);
   };
   return (
-    <div className="z-999 sticky top-0 flex min-h-[73px] max-w-screen items-center justify-end bg-bg_primary">
+    <div className="z-999 max-w-screen sticky top-0 flex min-h-[73px] items-center justify-end bg-bg_primary">
       <div className="mr-4 flex items-center gap-9">
         <div className="relative flex items-center">
           <div className="hidden md:block">

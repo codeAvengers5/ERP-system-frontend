@@ -15,11 +15,13 @@ const page = () => {
     <div className="lg:ml-12">
       <div className="flex flex-row justify-start md:justify-between ">
         <div className="m-1 flex h-auto w-auto items-center justify-center gap-2.5 rounded-[10px] bg-meke-550 p-2.5">
-          <p className="font-['Inter'] text-xl md:text-2xl font-normal text-white">News</p>
+          <p className="font-['Inter'] text-xl font-normal text-white md:text-2xl">
+            News
+          </p>
         </div>
         <div className="flex h-[49px] w-[123px] items-center justify-center gap-2.5 rounded-[10px] p-2.5">
           <Link href="/manager/policy">
-            <p className="font-['Inter'] text-xl md:text-2xl font-normal text-black">
+            <p className="font-['Inter'] text-xl font-normal text-black md:text-2xl">
               Policy
             </p>
           </Link>

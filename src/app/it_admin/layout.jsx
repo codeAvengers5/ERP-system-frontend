@@ -9,9 +9,7 @@ export default function DashboardLayout({ children }) {
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           <Navbar />
           <main>
-            <div className="mt-[10px]">
-              {children}
-            </div>
+            <div className="mt-[10px]">{children}</div>
           </main>
         </div>
       </div>
