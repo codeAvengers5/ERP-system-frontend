@@ -27,7 +27,7 @@ const page = () => {
           </Link>
         </div>
       </div>
-      <div className="mx-4 h-[0px] w-auto border-2 border-meke-550 md:w-[1086px]"></div>
+      <div className="mx-4 h-[0px] w-auto border-2 border-meke-550 "></div>
       <div className="mb-20 mt-6 hidden flex-row justify-end gap-2 px-12 md:flex">
         <Button color="meke-550" style={buttonStyle}>
           <div className=" flex  items-center justify-center gap-[39px] px-[25px]">

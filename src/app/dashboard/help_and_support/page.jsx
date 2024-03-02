@@ -1,4 +1,5 @@
-import FAQ from "../../../components/Colapsable";
+"use client";
+import FAQ from "@/components/Colapsable";
 const HelpAndSupportPage = () => {
   const faqs = [
     {

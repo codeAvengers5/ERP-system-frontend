@@ -1,4 +1,6 @@
 import React from "react";
+import { logosmall } from "../../public/images/index";
+import Image from "../../node_modules/next/image";
 
 const Sidebar = ({ currentPage }) => {
   const getPageLinks = () => {
@@ -183,10 +185,10 @@ const Sidebar = ({ currentPage }) => {
         <div className="font-inter absolute left-[65px] top-[24px] inline-block h-[45px] w-[191px] text-3xl font-semibold text-[#17A1FA]">
           Mekedoina
         </div>
-        <img
-          className="absolute left-[20px] top-[30px] h-[35px] w-[35px] rounded-[50%] object-cover"
+        <Image
+          className="absolute left-[20px] top-[20px] h-[35px] w-[35px] rounded-[50%]  object-cover"
           alt="logo"
-          src="/icons/logo.svg"
+          src={logosmall}
         />
       </div>
       <nav className="absolute left-[35px] top-[130px]">

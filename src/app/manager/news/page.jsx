@@ -13,19 +13,19 @@ const page = () => {
   };
   return (
     <div className="lg:ml-12">
-      <div className="flex flex-row sm:justify-start  lg:gap-[850px]">
+      <div className="flex flex-row justify-start md:justify-between ">
         <div className="m-1 flex h-auto w-auto items-center justify-center gap-2.5 rounded-[10px] bg-meke-550 p-2.5">
-          <p className="font-['Inter'] text-2xl font-normal text-white">News</p>
+          <p className="font-['Inter'] text-xl md:text-2xl font-normal text-white">News</p>
         </div>
         <div className="flex h-[49px] w-[123px] items-center justify-center gap-2.5 rounded-[10px] p-2.5">
           <Link href="/manager/policy">
-            <p className="font-['Inter'] text-2xl font-normal text-black">
+            <p className="font-['Inter'] text-xl md:text-2xl font-normal text-black">
               Policy
             </p>
           </Link>
         </div>
       </div>
-      <div className="mx-4 h-[0px] w-auto border-2 border-meke-550 md:w-[1086px]"></div>
+      <div className="mx-4 h-[0px] w-auto border-2 border-meke-550"></div>
       <div className="mb-20 mt-6 hidden flex-row justify-end gap-2 px-12 md:flex">
         <Button color="meke-550" style={buttonStyle}>
           <div className=" flex  items-center justify-center gap-[39px] px-[25px]">
@@ -43,7 +43,7 @@ const page = () => {
               {" "}
               <Image src={plus} alt="plus" />
             </div>
-            <div className="font-['Roboto'] text-2xl font-normal text-white">
+            <div className="font-['Roboto'] text-xl font-normal text-white">
               Add News
             </div>
           </div>
