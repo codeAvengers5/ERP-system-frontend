@@ -1,5 +1,6 @@
 import React from "react";
 const Displaycard = ({
+  children,
   variant = "default",
   width,
   height,
@@ -11,7 +12,7 @@ const Displaycard = ({
   children
 }) => {
   const baseProps = {
-    className: "flex "
+    className: "flex"
   };
 
   let selectedProps;
@@ -25,7 +26,7 @@ const Displaycard = ({
   } else if (variant === "card2") {
     selectedProps = {
       width: "580.38px",
-      height: "730.05px",
+      height: "full",
       className: `${baseProps.className}  bg-meke-300 rounded-[1px] `,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
     };
