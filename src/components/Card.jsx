@@ -1,11 +1,14 @@
 import React from "react";
 const Displaycard = ({
-  children,
   variant = "default",
   width,
   height,
   className,
-  style
+  style,
+  backgroundColor,
+  paddingTop,
+  margin,
+  children
 }) => {
   const baseProps = {
     className: "flex"
@@ -15,8 +18,8 @@ const Displaycard = ({
 
   if (variant === "card1") {
     selectedProps = {
-      width: "1036px",
-      height: "365px",
+      width: "auto",
+      height: "auto",
       className: `${baseProps.className}  bg-[#F0F9FF]  `
     };
   } else if (variant === "card2") {
@@ -40,8 +43,8 @@ const Displaycard = ({
     };
   } else if (variant === "card5") {
     selectedProps = {
-      width: "580px",
-      height: "411.257px",
+      width: "auto",
+      height: "auto",
       className: `${baseProps.className} relative bg-meke-300 rounded-sm`,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
     };
@@ -54,8 +57,8 @@ const Displaycard = ({
     };
   } else {
     selectedProps = {
-      width: "448px",
-      height: "597px",
+      width: "auto",
+      height: "auto",
       className: ` bg-white`,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
     };
@@ -68,9 +71,13 @@ const Displaycard = ({
         ...selectedProps.style,
         ...style,
         width: width || selectedProps.width,
-        height: height || selectedProps.height
+        height: height || selectedProps.height,
+        color: "#000",
+        margin: margin || "40px",
+        paddingTop: paddingTop || "0px",
+        backgroundColor: backgroundColor || undefined // Use backgroundColor prop if provided
       }}>
-      {children}
+      <div>{children}</div>
     </div>
   );
 };

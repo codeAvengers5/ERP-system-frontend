@@ -9,7 +9,7 @@ export default function DashboardLayout({ children }) {
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           <Navbar />
           <main>
-            <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+            <div className="hideScrollbar  fixed top-[100px] h-full  overflow-x-auto pb-20 md:top-[56px] lg:left-[240px]">
               {children}
             </div>
           </main>
