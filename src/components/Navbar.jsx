@@ -1,11 +1,8 @@
 "use client";
 import { useState } from "react";
-import InputField from "./InputField";
 import Image from "next/image";
 import Avatar from "./Avater";
-import notificationbell from "../../public/icons/notify.svg";
-import search from "../../public/icons/search.svg";
-import outline from "../../public/icons/outline.svg";
+import { notificationbell, search, outline } from "../../public/icons/index";
 
 const Navbar = () => {
   const [isInputVisible, setInputVisible] = useState(false);

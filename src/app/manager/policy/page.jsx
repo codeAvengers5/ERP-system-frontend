@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "../../../../node_modules/next/image";
-import manager1 from "../../../../public/images/manager1.png";
-import manager2 from "../../../../public/images/manager2.png";
-import manager3 from "../../../../public/images/manager3.png";
+// import manager1 from "../../../../public/images/manager1.png";
+// import manager2 from "../../../../public/images/manager2.png";
+// import manager3 from "../../../../public/images/manager3.png";
 import edit from "../../../../public/icons/edit.svg";
 import delet from "../../../../public/icons/delete.svg";
 import filter from "../../../../public/icons/mi_filter.svg";

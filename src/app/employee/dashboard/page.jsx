@@ -5,8 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import Image from "next/image";
 import Displaycard from "@/components/Card";
-import Employ1 from "../../../../public/images/Employ1.png";
-import Employ2 from "../../../../public/images/manager2.png";
+import { Employ1, Employ2 } from "../../../../public/images/index";
 
 export default class NextJsCarousel extends Component {
   constructor(props) {

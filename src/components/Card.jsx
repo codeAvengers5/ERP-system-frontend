@@ -1,6 +1,5 @@
 import React from "react";
 const Displaycard = ({
-  children,
   variant = "default",
   width,
   height,
