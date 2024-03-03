@@ -6,24 +6,36 @@ import CustomSelect from "@/components/CustomSelect";
 import FormWrapper from "@/components/FormWrapper";
 import InputField from "@/components/InputField";
 import Text from "@/components/TextField";
+import { register } from "@/slices/auth";
+import { clearMessage } from "@/slices/message";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const initialState = {
-  nameOfEmployee: "",
+  full_name: "",
   email: "",
   password: "",
   position: "",
-  role: "",
-  workStartDate: new Date(),
+  role_name: "" || "Employee",
+  start_date: new Date(),
   salary: "",
   gender: "",
-  nationalId: []
+  images: new FormData()
 };
 
 const page = () => {
   const [user, setUser] = useState(initialState);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [imagebox, setImageBox] = useState(false);
+  const [successful, setSuccessful] = useState(false);
+
+  const { message } = useSelector(state => state.message);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
 
   const handleSelectFile = e => {
     setImageBox(true);
@@ -33,7 +45,12 @@ const page = () => {
       ...files.map(file => URL.createObjectURL(file))
     ]);
 
-    setUser({ ...user, nationalId: [...user.nationalId, ...files] });
+    // const formData = new FormData();
+
+    Array.from(files).forEach(file => {
+      user.images.append("images", file);
+    });
+    setUser({ ...user});
   };
 
   const onInputChange = e => {
@@ -48,14 +65,37 @@ const page = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log("user data", user);
+    setSuccessful(false);
+
+    dispatch(register(user))
+      .unwrap()
+      .then(() => {
+        setSuccessful(true);
+      })
+      .catch(() => {
+        setSuccessful(false);
+      });
     setUser(initialState);
   };
 
   const genderdata = ["Male", "Female"];
-  const roledata = ["HR", "Manager", "Employee"];
+  const roledata = ["Manager", "HR", "Employee"];
 
   return (
     <div className="flex justify-center">
+      <div className="align-self-end">
+        {message && (
+          <div>
+            <div
+              className={
+                successful ? "alert alert-success" : "alert alert-danger"
+              }
+              role="alert">
+              {message}
+            </div>
+          </div>
+        )}
+      </div>
       <Displaycard variant="card2">
         <FormWrapper onSubmit={handleSubmit}>
           <div>
@@ -66,8 +106,8 @@ const page = () => {
             <InputField
               type="text"
               placeholder="Enter full name of employee"
-              name="nameOfEmployee"
-              value={user.nameOfEmployee}
+              name="full_name"
+              value={user.full_name}
               onChange={onInputChange}
             />
           </div>
@@ -92,7 +132,7 @@ const page = () => {
             />
           </div>
           <div>
-            <Text className="pb-[14px]" content="Position" />
+            <Text className="pb-[5px] md:pb-[10px]" content="Position" />
             <InputField
               type="text"
               placeholder="Enter occupation of the employee"
@@ -102,11 +142,11 @@ const page = () => {
             />
           </div>
           <div>
-            <Text className="pb-[14px]" content="Role" />
+            <Text className="pb-[5px] md:pb-[10px]" content="Role" />
             <CustomSelect
               data={roledata}
+              name="role_name"
               title="Select role"
-              name="role"
               onChange={onInputChange}
             />
           </div>
@@ -115,8 +155,8 @@ const page = () => {
             <InputField
               type="date"
               placeholder="Enter occupation of the employee"
-              name="workStartDate"
-              value={user.workStartDate}
+              name="start_date"
+              value={user.start_date}
               onChange={onInputChange}
             />
           </div>
@@ -149,7 +189,7 @@ const page = () => {
                 type="file"
                 id="custom-input"
                 multiple
-                name="nationalId"
+                name="images"
                 accept="image/jpeg, image/png, image/jpg"
                 onChange={handleSelectFile}
                 hidden

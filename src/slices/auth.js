@@ -1,9 +1,28 @@
+"use client";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
 
-import AuthService from "../services/auth.service";
 
-const user = JSON.parse(localStorage.getItem("user"));
+import authService from "../services/auth.service";
+
+// let user = null;
+
+// try {
+//   const userString = localStorage.getItem("user");
+//   if (userString) {
+//     user = JSON.parse(userString);
+//   }
+// } catch (error) {
+//   console.error("Error parsing user data:", error);
+// }
+let user = null;
+if (typeof localStorage !== "undefined") {
+
+const userString = localStorage.getItem("user");
+user = userString ? JSON.parse(userString) : null;
+} else {
+  console.error("localStorage is not available in this environment.");
+}
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -22,7 +41,7 @@ export const register = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const response = await AuthService.register(
+      const response = await authService.register(
         full_name,
         email,
         password,
@@ -52,7 +71,7 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      const data = await AuthService.login(email, password);
+      const data = await authService.login(email, password);
       return { user: data };
     } catch (error) {
       const message =
@@ -68,7 +87,7 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk("auth/logout", async () => {
-  await AuthService.logout();
+  await authService.logout();
 });
 
 const initialState = user
@@ -78,27 +97,29 @@ const initialState = user
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  extraReducers: {
-    [register.fulfilled]: (state, action) => {
-      state.isLoggedIn = false;
-    },
-    [register.rejected]: (state, action) => {
-      state.isLoggedIn = false;
-    },
-    [login.fulfilled]: (state, action) => {
-      state.isLoggedIn = true;
-      state.user = action.payload.user;
-    },
-    [login.rejected]: (state, action) => {
-      state.isLoggedIn = false;
-      state.user = null;
-    },
-    [logout.fulfilled]: (state, action) => {
-      state.isLoggedIn = false;
-      state.user = null;
-    }
-  }
+  extraReducers: builder => {
+    builder
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoggedIn = false;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoggedIn = false;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.user = action.payload.user;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoggedIn = false;
+        state.user = null;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.isLoggedIn = false;
+        state.user = null;
+      });
+  },
 });
 
-const { reducer } = authSlice;
-export default reducer;
+export const { reducer} = authSlice.actions;
+export default authSlice.reducer;
+

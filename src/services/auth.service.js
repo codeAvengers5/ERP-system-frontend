@@ -1,6 +1,6 @@
 import axios from "../../node_modules/axios/index";
 
-const API_URI = "http://localhost:8000/api/auth";
+const API_URI = "http://localhost:8000/mekedonia";
 
 const register = (
   full_name,
@@ -11,9 +11,9 @@ const register = (
   start_date,
   salary,
   gender,
-  images
+  [...images]
 ) => {
-  return axios.post(API_URI + "registeradmins", {
+  return axios.post(API_URI + "/registeradmins", {
     full_name,
     email,
     password,
@@ -26,9 +26,9 @@ const register = (
   });
 };
 
-const login = (email, password) => {
+const login = async(email, password) => {
   return axios
-    .post(API_URI + "loginadmin", {
+    .post(API_URI + "/loginadmin", {
       email,
       password
     })

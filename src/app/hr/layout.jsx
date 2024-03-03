@@ -1,8 +1,10 @@
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import ReduxProvider from "@/store/ReduxProvider";
 
 export default function DashboardLayout({ children }) {
   return (
+    <ReduxProvider>
     <section>
       <div className="flex h-screen overflow-hidden">
         <Sidebar />
@@ -14,5 +16,6 @@ export default function DashboardLayout({ children }) {
         </div>
       </div>
     </section>
+    </ReduxProvider>
   );
 }
