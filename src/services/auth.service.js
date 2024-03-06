@@ -1,6 +1,8 @@
-import axios from "../../node_modules/axios/index";
+"use client";
+import axios from "axios";
+import localStorage from "redux-persist/es/storage";
 
-const API_URI = "http://localhost:8000/api/auth";
+const API_URI = "http://localhost:8000/";
 
 const register = (
   full_name,
@@ -13,17 +15,26 @@ const register = (
   gender,
   images
 ) => {
-  return axios.post(API_URI + "registeradmins", {
-    full_name,
-    email,
-    password,
-    position,
-    role_name,
-    start_date,
-    salary,
-    gender,
-    images
-  });
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  };
+  return axios.post(
+    API_URI + "registeradmins",
+    {
+      full_name,
+      email,
+      password,
+      position,
+      role_name,
+      start_date,
+      salary,
+      gender,
+      images
+    },
+    config
+  );
 };
 
 const login = (email, password) => {
@@ -33,8 +44,8 @@ const login = (email, password) => {
       password
     })
     .then(response => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+      if (response.data.userInfo.token) {
+        localStorage.setItem("user", JSON.stringify(response.data.userInfo));
       }
 
       return response.data;
