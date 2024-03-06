@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-unresolved */
 "use client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import localStorage from "redux-persist/es/storage";
