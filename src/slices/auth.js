@@ -1,11 +1,8 @@
 "use client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import localStorage from "redux-persist/es/storage";
 import { setMessage } from "./message";
 
 import AuthService from "../services/auth.service";
-
-const user = localStorage.getItem("user");
 
 export const register = createAsyncThunk(
   "auth/register",
