@@ -20,7 +20,7 @@ const initialState = {
   email: "",
   password: "",
   position: "",
-  role_name: "" || "Employee",
+  role_name: "",
   start_date: new Date(),
   salary: "",
   gender: "",
@@ -43,26 +43,27 @@ const page = () => {
   const handleSelectFile = e => {
     setImageBox(true);
     const files = Array.from(e.target.files);
-    setSelectedFiles(prevSelectedFiles => [
-      ...prevSelectedFiles,
+    setSelectedFiles([
+      ...selectedFiles,
       ...files.map(file => URL.createObjectURL(file))
     ]);
-    const formData = new FormData();
-    files.forEach(file => {
-      formData.append("images", file);
+    Array.from(files).forEach(file => {
+      console.log(file);
+      user.images.append("images", file);
     });
-    for (const value of formData.values()) {
-      console.log(value);
+    console.log(user.images.has("images"));
+    console.log(user.images.get("images"));
+    for (const [key, value] of user.images.entries()) {
+      console.log(key, value);
     }
-    setUser(prevUser => ({
-      ...prevUser,
-      images: formData.values()
-    }));
+    setUser({ ...user });
   };
-
   const onInputChange = e => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setUser(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   const handlePreviewLoad = index => {
@@ -72,8 +73,20 @@ const page = () => {
   const handleSubmit = e => {
     e.preventDefault();
     setSuccessful(false);
-    console.log(user.images);
-    dispatch(register(user))
+    const formData = new FormData();
+    formData.append("full_name", user.full_name);
+    formData.append("email", user.email);
+    formData.append("position", user.position);
+    formData.append("role_name", user.role_name);
+    formData.append("password", user.password);
+    formData.append("start_date", user.start_date);
+    formData.append("salary", user.salary);
+    formData.append("gender", user.gender);
+    for (const [key, file] of user.images.entries()) {
+      formData.append(key, file);
+    }
+    console.log(...formData.entries());
+    dispatch(register(formData))
       .unwrap()
       .then(() => {
         setSuccessful(true);
@@ -81,11 +94,19 @@ const page = () => {
       .catch(() => {
         setSuccessful(false);
       });
+
     setUser(initialState);
   };
 
-  const genderdata = ["Male", "Female"];
-  const roledata = ["Manager", "HR", "Employee"];
+  const genderdata = [
+    { name: "Male", value: "male" },
+    { name: "Female", value: "female" }
+  ];
+  const roledata = [
+    { name: "Manager", value: "manager" },
+    { name: "HR", value: "hradmin" },
+    { name: "Employee", value: "employee" }
+  ];
   return (
     <div className="flex justify-center">
       <div className="align-self-end">
@@ -150,9 +171,10 @@ const page = () => {
             <Text className="pb-[5px] md:pb-[10px]" content="Role" />
             <CustomSelect
               data={roledata}
+              value={user.role_name}
               name="role_name"
               title="Select role"
-              onChange={onInputChange}
+              onSelect={onInputChange}
             />
           </div>
           <div>
@@ -179,6 +201,7 @@ const page = () => {
             <Text className="pb-[5px] md:pb-[10px]" content="Gender" />
             <CustomSelect
               data={genderdata}
+              value={user.gender}
               name="gender"
               title="Select gender"
               onSelect={onInputChange}
@@ -231,7 +254,7 @@ const page = () => {
           </div>
           <div className="col-span-1 md:col-span-2">
             <Button color="bt_primary" type="submit">
-              submit
+              Add New Employee
             </Button>
           </div>
         </FormWrapper>

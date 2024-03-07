@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 const CustomSelect = ({ onSelect, title, data, name }) => {
   let options = data.map((item, index) => (
-    <option key={index} value={item} className="text-tx_secondary">
-      {item}
+    <option key={index} value={item.value} className="text-tx_secondary">
+      {item.name}
     </option>
   ));
 
