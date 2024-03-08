@@ -5,11 +5,11 @@ import messageReducer from "../slices/message";
 const reducer = {
   auth: authReducer,
   message: messageReducer
-}
+};
 
 const store = configureStore({
   reducer: reducer,
-  devTools: true,
-})
+  devTools: true
+});
 
 export default store;

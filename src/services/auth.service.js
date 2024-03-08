@@ -2,7 +2,6 @@
 import axios from "axios";
 import localStorage from "redux-persist/es/storage";
 
-
 const API_URI = "http://localhost:8000/";
 
 const register = (
@@ -38,7 +37,7 @@ const register = (
   );
 };
 
-const login = async(email, password) => {
+const login = async (email, password) => {
   return axios
     .post(API_URI + "/loginadmin", {
       email,
