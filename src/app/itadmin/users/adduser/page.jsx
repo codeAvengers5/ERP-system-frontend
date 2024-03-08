@@ -1,5 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable import/no-unresolved */
 "use client";
 
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "@/components/Button";
 import Displaycard from "@/components/Card";
 import CustomSelect from "@/components/CustomSelect";
@@ -8,9 +14,12 @@ import InputField from "@/components/InputField";
 import Text from "@/components/TextField";
 import { register } from "@/slices/auth";
 import { clearMessage } from "@/slices/message";
+<<<<<<< HEAD:src/app/it_admin/users/adduser/page.jsx
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+=======
+>>>>>>> dev:src/app/itadmin/users/adduser/page.jsx
 
 const initialState = {
   full_name: "",
@@ -44,6 +53,7 @@ const page = () => {
       ...prevSelectedFiles,
       ...files.map(file => URL.createObjectURL(file))
     ]);
+<<<<<<< HEAD:src/app/it_admin/users/adduser/page.jsx
 
     // const formData = new FormData();
 
@@ -51,6 +61,19 @@ const page = () => {
       user.images.append("images", file);
     });
     // setUser({ ...user});
+=======
+    const formData = new FormData();
+    files.forEach(file => {
+      formData.append("images", file);
+    });
+    for (const value of formData.values()) {
+      console.log(value);
+    }
+    setUser(prevUser => ({
+      ...prevUser,
+      images: formData.values()
+    }));
+>>>>>>> dev:src/app/itadmin/users/adduser/page.jsx
   };
 
   const onInputChange = e => {
@@ -64,9 +87,14 @@ const page = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+<<<<<<< HEAD:src/app/it_admin/users/adduser/page.jsx
     console.log("user data", user);
     setSuccessful(false);
 
+=======
+    setSuccessful(false);
+    console.log(user.images);
+>>>>>>> dev:src/app/itadmin/users/adduser/page.jsx
     dispatch(register(user))
       .unwrap()
       .then(() => {
@@ -80,7 +108,10 @@ const page = () => {
 
   const genderdata = ["Male", "Female"];
   const roledata = ["Manager", "HR", "Employee"];
+<<<<<<< HEAD:src/app/it_admin/users/adduser/page.jsx
 
+=======
+>>>>>>> dev:src/app/itadmin/users/adduser/page.jsx
   return (
     <div className="flex justify-center">
       <div className="align-self-end">

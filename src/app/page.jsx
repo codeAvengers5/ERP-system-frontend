@@ -1,24 +1,31 @@
+/* eslint-disable import/no-duplicates */
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable import/no-unresolved */
 "use client";
 import React from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { login_banner, logo } from "../../public/images/index";
-import Text from "@/components/TextField";
+import Text from "../components/TextField";
 import Image from "../../node_modules/next/image";
+// eslint-disable-next-line import/no-unresolved
 import InputField from "@/components/InputField";
-import { useState } from "react";
 import Link from "../../node_modules/next/link";
 import Button from "@/components/Button";
-import { useEffect } from "react";
 import FormWrapper from "@/components/FormWrapper";
-
+import { login } from "@/slices/auth";
+import userService from "@/services/user.service";
+import { useRouter } from "../../node_modules/next/navigation";
 const initialState = {
   email: "",
   password: ""
 };
 
 const page = () => {
-  const [user, setUser] = useState(initialState);
+  const [users, setUser] = useState(initialState);
   const [rememberMe, setRememberMe] = useState(false);
-
+  const dispatch = useDispatch();
+  const router = useRouter();
   useEffect(() => {
     const rememberMeValue = localStorage.getItem("rememberMe") === "true";
     setRememberMe(rememberMeValue);
@@ -26,18 +33,34 @@ const page = () => {
 
   const onInputChange = e => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setUser({ ...users, [name]: value });
   };
 
   const handleRememberMe = e => {
     setRememberMe(e.target.checked);
     localStorage.setItem("rememberMe", e.target.checked);
   };
+  const { user, isLoggedIn } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      console.log(user, isLoggedIn);
+      userService
+        .getITAdminBoard()
+        .then(response => {
+          console.log(response.data);
+          router.push(user.roleName);
+        })
+        .catch(error => {
+          console.log(error);
+          throw new Error("Unauthorized");
+        });
+    }
+  }, [dispatch, isLoggedIn, router, user]);
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("user data", user);
-    setUser(initialState);
+    dispatch(login(users));
   };
 
   return (
@@ -64,14 +87,14 @@ const page = () => {
             type="text"
             placeholder="Enter your email"
             name="email"
-            value={user.email}
+            value={users.email}
             onChange={onInputChange}
           />
           <InputField
             type="password"
             placeholder="Enter your password"
             name="password"
-            value={user.password}
+            value={users.password}
             onChange={onInputChange}
           />
           <div className="flex w-full flex-col justify-between gap-[10px] align-middle md:flex-row">

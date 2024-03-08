@@ -1,5 +1,4 @@
 /* eslint-disable import/no-unresolved */
-// eslint-disable-next-line import/no-unresolved
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import ReduxProvider from "@/store/ReduxProvider";
