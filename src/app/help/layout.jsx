@@ -6,12 +6,12 @@ export default function DashboardLayout({ children }) {
   return (
     <ReduxProvider>
       <section>
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex bg-[#F5F8FA]">
           <Sidebar />
-          <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+          <div className="flex-0 flex w-[100vw] flex-col">
             <Navbar />
             <main>
-              <div className="mt-[10px]">{children}</div>
+              <div className="relative overflow-y-auto">{children}</div>
             </main>
           </div>
         </div>

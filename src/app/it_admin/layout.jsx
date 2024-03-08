@@ -5,17 +5,19 @@ import ReduxProvider from "@/store/ReduxProvider";
 export default function DashboardLayout({ children }) {
   return (
     <ReduxProvider>
-    <section>
-      <div className="flex h-screen overflow-hidden">
-        <Sidebar />
-        <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-          <Navbar />
-          <main>
-            <div className="mt-[10px]">{children}</div>
-          </main>
+      <section>
+        <div className="flex bg-[#F5F8FA]">
+          <Sidebar />
+          <div className="flex-0 flex w-[100dvw] flex-col">
+            <Navbar />
+            <main>
+              <div className="relative overflow-y-auto overflow-x-hidden">
+                {children}
+              </div>
+            </main>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </ReduxProvider>
   );
 }
