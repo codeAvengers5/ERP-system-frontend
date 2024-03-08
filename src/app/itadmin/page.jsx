@@ -10,7 +10,6 @@ import Text from "@/components/TextField";
 import Link from "../../../../node_modules/next/link";
 import Table from "@/components/Table";
 
-<<<<<<< HEAD:src/app/it_admin/users/page.jsx
 const page = () => {
   const buttonStyle = {
     width: "200px",
@@ -106,8 +105,3 @@ const page = () => {
 };
 
 export default page;
-=======
-export default function page() {
-  return <div>page</div>;
-}
->>>>>>> dev:src/app/itadmin/page.jsx

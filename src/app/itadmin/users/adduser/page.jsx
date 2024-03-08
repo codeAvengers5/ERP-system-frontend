@@ -14,12 +14,6 @@ import InputField from "@/components/InputField";
 import Text from "@/components/TextField";
 import { register } from "@/slices/auth";
 import { clearMessage } from "@/slices/message";
-<<<<<<< HEAD:src/app/it_admin/users/adduser/page.jsx
-import { useEffect } from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-=======
->>>>>>> dev:src/app/itadmin/users/adduser/page.jsx
 
 const initialState = {
   full_name: "",
@@ -53,15 +47,6 @@ const page = () => {
       ...prevSelectedFiles,
       ...files.map(file => URL.createObjectURL(file))
     ]);
-<<<<<<< HEAD:src/app/it_admin/users/adduser/page.jsx
-
-    // const formData = new FormData();
-
-    Array.from(files).forEach(file => {
-      user.images.append("images", file);
-    });
-    // setUser({ ...user});
-=======
     const formData = new FormData();
     files.forEach(file => {
       formData.append("images", file);
@@ -73,7 +58,6 @@ const page = () => {
       ...prevUser,
       images: formData.values()
     }));
->>>>>>> dev:src/app/itadmin/users/adduser/page.jsx
   };
 
   const onInputChange = e => {
@@ -87,14 +71,8 @@ const page = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-<<<<<<< HEAD:src/app/it_admin/users/adduser/page.jsx
-    console.log("user data", user);
-    setSuccessful(false);
-
-=======
     setSuccessful(false);
     console.log(user.images);
->>>>>>> dev:src/app/itadmin/users/adduser/page.jsx
     dispatch(register(user))
       .unwrap()
       .then(() => {
@@ -108,10 +86,6 @@ const page = () => {
 
   const genderdata = ["Male", "Female"];
   const roledata = ["Manager", "HR", "Employee"];
-<<<<<<< HEAD:src/app/it_admin/users/adduser/page.jsx
-
-=======
->>>>>>> dev:src/app/itadmin/users/adduser/page.jsx
   return (
     <div className="flex justify-center">
       <div className="align-self-end">
