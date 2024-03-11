@@ -1,10 +1,10 @@
 "use client";
 import Button from "@/components/Button";
 import React from "react";
-import Image from "/next/image";
+import Image from "../../../../node_modules/next/image";
 import { filter, plus } from "../../../../public/icons";
 import Text from "@/components/TextField";
-import Link from "/next/link";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 
 const page = () => {
@@ -18,12 +18,7 @@ const page = () => {
     height: "60px"
   };
 
-  // const dispatch = useDispatch();
   const { loading, error } = useSelector(state => state.auth);
-
-  // useEffect(() => {
-  //   dispatch(fetchUserData());
-  // }, [dispatch]);
 
   if (loading) {
     return <p>Loading...</p>;
