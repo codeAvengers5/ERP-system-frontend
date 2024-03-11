@@ -25,13 +25,13 @@ const Sidebar = () => {
       {
         id: 1,
         name: "Dashboard",
-        href: "/it_admin/dashboard",
+        href: "/itadmin/dashboard",
         icon: <BiSolidDashboard size={33} />
       },
       {
         id: 2,
         name: "User and Permission",
-        href: "/it_admin/users",
+        href: "/itadmin/users",
         icon: <BsPeopleFill size={33} />
       },
       {

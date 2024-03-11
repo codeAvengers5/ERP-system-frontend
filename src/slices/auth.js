@@ -1,8 +1,7 @@
 "use client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
-
-import AuthService from "../services/auth.service";
+import authService from "../services/auth.service";
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -44,11 +43,30 @@ export const login = createAsyncThunk(
   }
 );
 
+export const fetchUserData = createAsyncThunk(
+  "auth/fetchUser",
+  async (_, thunkAPI) => {
+    try {
+      const data = await authService.fetchUserData();
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.message || "Failed to fetch user data");
+    }
+  }
+);
+
 export const logout = createAsyncThunk("auth/logout", async () => {
   authService.logout();
 });
 
-const initialState = { isLoggedIn: false, user: null, loading: false };
+const initialState = {
+  isLoggedIn: false,
+  user: null,
+  loading: false,
+  data: [],
+  error: null
+};
 
 const authSlice = createSlice({
   name: "auth",
@@ -78,6 +96,17 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, state => {
         state.isLoggedIn = false;
         state.user = null;
+      })
+      .addCase(fetchUserData.pending, state => {
+        state.loading = true;
+      })
+      .addCase(fetchUserData.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.data = payload;
+      })
+      .addCase(fetchUserData.rejected, state => {
+        state.loading = false;
+        state.error = "Failed to fetch user data";
       });
   }
 });

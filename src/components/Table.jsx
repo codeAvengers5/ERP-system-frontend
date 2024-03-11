@@ -76,7 +76,7 @@ const Table = ({ data, columns, space, color }) => {
   return (
     <div className="overflow-x-auto">
       <table
-        className={`w-[800px] table-auto border-separate border-spacing-x-0 text-small font-regular md:text-base  text-${color} ${tableSpaceClass}`}>
+        className={`w-full table-auto border-separate border-spacing-x-0 text-small font-regular md:text-base  text-${color} ${tableSpaceClass}`}>
         <colgroup>
           {columns.map((_, index) => (
             <col key={`col-${index}`} className="w-auto" />

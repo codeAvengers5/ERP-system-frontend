@@ -2,7 +2,7 @@
 import axios from "axios";
 import localStorage from "redux-persist/es/storage";
 
-const API_URI = "http://localhost:8000/";
+const API_URI = "http://localhost:8000/mekedonia";
 const register = formData => {
   const config = {
     headers: {
@@ -31,10 +31,17 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+const fetchUserData = async () => {
+  const response = await fetch(API_URI + "/users");
+  const data = await response.json();
+  console.log(data);
+  return data;
+};
 const authService = {
   register,
   login,
-  logout
+  logout,
+  fetchUserData
 };
 
 export default authService;
