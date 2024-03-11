@@ -1,16 +1,11 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/order */
 "use client";
 import Button from "@/components/Button";
 import React from "react";
-import Image from "../../../../node_modules/next/image";
-import { filter, plus } from "../../../../public/icons/index";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchUserData } from "@/slices/auth";
+import Image from "/next/image";
+import { filter, plus } from "../../../../public/icons";
 import Text from "@/components/TextField";
-import Link from "../../../../node_modules/next/link";
-import { useSelector } from "../../../../node_modules/react-redux/dist/react-redux";
+import Link from "/next/link";
+import { useSelector } from "react-redux";
 
 const page = () => {
   const buttonStyle = {

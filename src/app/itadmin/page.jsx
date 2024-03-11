@@ -1,8 +1,8 @@
 "use client";
 import Button from "@/components/Button";
 import React from "react";
-import Image from "../../../../node_modules/next/image";
-import { filter, plus } from "../../../../public/icons/index";
+import Image from "/next/image"
+import { filter, plus } from "../../../public/icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "@/slices/auth";
