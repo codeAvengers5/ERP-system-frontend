@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import ReduxProvider from "@/store/ReduxProvider";
@@ -12,7 +11,9 @@ export default function DashboardLayout({ children }) {
           <div className="flex-0 flex w-[100dvw] flex-col">
             <Navbar />
             <main>
-              <div className="relative overflow-y-auto">{children}</div>
+              <div className="relative overflow-y-auto overflow-x-hidden">
+                {children}
+              </div>
             </main>
           </div>
         </div>

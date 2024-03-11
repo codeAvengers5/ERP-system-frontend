@@ -13,7 +13,7 @@ const register = (
   start_date,
   salary,
   gender,
-  images
+  [...images]
 ) => {
   const config = {
     headers: {
@@ -37,9 +37,9 @@ const register = (
   );
 };
 
-const login = (email, password) => {
+const login = async (email, password) => {
   return axios
-    .post(API_URI + "loginadmin", {
+    .post(API_URI + "/loginadmin", {
       email,
       password
     })

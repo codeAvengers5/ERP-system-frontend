@@ -1,3 +1,7 @@
+import { RiEditFill } from "react-icons/ri";
+import { MdDelete } from "react-icons/md";
+import Avatar from "./Avater";
+
 const Table = ({ data, columns, space, color }) => {
   let tableSpaceClass = "";
 
@@ -11,7 +15,7 @@ const Table = ({ data, columns, space, color }) => {
     return (
       <th
         key={`headCell-${index}`}
-        className="!z-0 px-3 py-[15px] text-left font-regular">
+        className="!z-0 px-2 py-[15px] text-left font-regular">
         {column.title}
       </th>
     );
@@ -31,8 +35,36 @@ const Table = ({ data, columns, space, color }) => {
               : row[column.key];
 
             return (
-              <td key={`cell-${index2}`} className={`px-3 py-[15px] `}>
-                {value}
+              <td key={`cell-${index2}`} className={`px-2 py-[15px] `}>
+                {index2 === 0 ? (
+                  <div className="relative items-center">
+                    {row.image_profile ? (
+                      <Avatar img={row.image_profile} width={80} height={80} />
+                    ) : (
+                      <Avatar
+                        initials={row.name.substring(0, 2)}
+                        width={80}
+                        height={80}
+                      />
+                    )}
+                  </div>
+                ) : (
+                  value
+                )}
+                {index2 === columns.length - 1 && (
+                  <div className="flex gap-[15px] md:gap-[30px] ">
+                    <button>
+                      <RiEditFill size={24} className="text-bt_additional" />
+                    </button>
+
+                    <button>
+                      <MdDelete
+                        size={24}
+                        className="rounded text-bt_tertiary"
+                      />
+                    </button>
+                  </div>
+                )}
               </td>
             );
           })}
@@ -42,13 +74,20 @@ const Table = ({ data, columns, space, color }) => {
   );
 
   return (
-    <table
-      className={`w-full table-fixed border-separate border-spacing-x-0 font-regular text-${color} ${tableSpaceClass}`}>
-      <thead className="bg-meke-500">
-        <tr>{headers}</tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <div className="overflow-x-auto">
+      <table
+        className={`w-[800px] table-auto border-separate border-spacing-x-0 text-small font-regular md:text-base  text-${color} ${tableSpaceClass}`}>
+        <colgroup>
+          {columns.map((_, index) => (
+            <col key={`col-${index}`} className="w-auto" />
+          ))}
+        </colgroup>
+        <thead className="bg-meke-500">
+          <tr>{headers}</tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
   );
 };
 

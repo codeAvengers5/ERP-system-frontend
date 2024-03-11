@@ -184,7 +184,7 @@ const page = () => {
               onSelect={onInputChange}
             />
           </div>
-          <div className="w-[300px] md:w-[550px]">
+          <div className="w-[250px] md:w-[550px]">
             <Text
               className="pb-[5px] md:pb-[10px]"
               content="Image of National ID/ License ID"

@@ -1,10 +1,7 @@
 import React from "react";
 const Displaycard = ({
   variant = "default",
-  width,
-  height,
   className,
-  style,
   backgroundColor,
   paddingTop,
   margin,
@@ -18,65 +15,56 @@ const Displaycard = ({
 
   if (variant === "card1") {
     selectedProps = {
-      width: "auto",
-      height: "auto",
-      className: `${baseProps.className}  bg-[#F0F9FF]  `
+      className: `${baseProps.className}  bg-[#F0F9FF]  min-w-[300px] md:w-5/6 min-h-[500px]`
     };
   } else if (variant === "card2") {
     selectedProps = {
-      width: "580.38px",
-      height: "full",
-      className: `${baseProps.className}  bg-meke-300 rounded-[1px] `,
+      className: `${baseProps.className}  bg-meke-300 rounded-[1px] w-[300px] md:w-[580.38px] h-full md:h-[770px]`,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
     };
   } else if (variant === "card3") {
     selectedProps = {
-      width: "517.54px",
-      height: "311.612px",
-      className: `${baseProps.className}  bg-white rounded-[16px]`
+      className: `${baseProps.className}  bg-white rounded-[16px] w-[300px] md:w-[517.54px] h-full md:h-[311.612px]`
     };
   } else if (variant === "card4") {
     selectedProps = {
-      width: "1043px",
-      height: "427.597px",
-      className: `${baseProps.className} bg-white rounded-[16px] `
+      className: `${baseProps.className} bg-white rounded-[16px] w-[400px] md:w-4/5 h-[300px] md:h-[428px]`
     };
   } else if (variant === "card5") {
     selectedProps = {
-      width: "auto",
-      height: "auto",
-      className: `${baseProps.className} relative bg-meke-300 rounded-sm`,
+      className: `${baseProps.className} relative bg-meke-300 rounded-sm w-[300px] md:w-[580px] h-full md:h-[412px]`,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
     };
   } else if (variant === "card6") {
     selectedProps = {
-      width: "1036px;",
-      height: "339px",
-      className: `${baseProps.className}  bg-[#F8FCFF] `,
+      className: `${baseProps.className}  bg-[#F8FCFF] w-[400px]  md:w-4/5 h-[100px] md:h-[339px]`,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
+    };
+  } else if (variant === "card7") {
+    selectedProps = {
+      className: `${baseProps.className}  bg-[#E0F3FF]  md:w-5/6 min-h-[80px]`
     };
   } else {
     selectedProps = {
-      width: "auto",
-      height: "auto",
-      className: ` bg-white`,
+      // width: "auto",
+      // height: "auto",
+      // className: ` bg-white`,
       style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
     };
   }
 
+  const containerStyle = {
+    color: "#000",
+    margin: margin || "40px",
+    paddingTop: paddingTop || "0px",
+    backgroundColor: backgroundColor || undefined, // Use backgroundColor prop if provided
+    transition: "width 0.3s ease" // Optional transition effect
+  };
+
   return (
     <div
-      className={selectedProps.className}
-      style={{
-        ...selectedProps.style,
-        ...style,
-        width: width || selectedProps.width,
-        height: height || selectedProps.height,
-        color: "#000",
-        margin: margin || "40px",
-        paddingTop: paddingTop || "0px",
-        backgroundColor: backgroundColor || undefined // Use backgroundColor prop if provided
-      }}>
+      className={selectedProps.className || className}
+      style={{ ...selectedProps.style, ...containerStyle }}>
       <div>{children}</div>
     </div>
   );
