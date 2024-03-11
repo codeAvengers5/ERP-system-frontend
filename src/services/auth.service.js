@@ -4,7 +4,6 @@ import localStorage from "redux-persist/es/storage";
 
 const API_URI = "http://localhost:8000/";
 const register = formData => {
-
   const config = {
     headers: {
       "Content-Type": "multipart/form-data"
