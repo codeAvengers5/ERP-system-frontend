@@ -6,32 +6,9 @@ import AuthService from "../services/auth.service";
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (
-    {
-      full_name,
-      email,
-      password,
-      position,
-      role_name,
-      start_date,
-      salary,
-      gender,
-      images
-    },
-    thunkAPI
-  ) => {
+  async (formData, thunkAPI) => {
     try {
-      const response = await authService.register(
-        full_name,
-        email,
-        password,
-        position,
-        role_name,
-        start_date,
-        salary,
-        gender,
-        images
-      );
+      const response = await AuthService.register(formData);
       thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {
