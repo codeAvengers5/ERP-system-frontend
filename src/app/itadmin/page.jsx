@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import React from "react";
-import Image from "/next/image"
+import Image from "/next/image";
 import { filter, plus } from "../../../public/icons";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
