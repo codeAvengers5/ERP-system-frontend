@@ -48,7 +48,7 @@ const ImageOptions = ({
   } else if (initials) {
     return (
       <div
-        className={`flex items-center justify-center bg-bt_primary text-xl font-extrabold text-tx_tertiary ${
+        className={`flex items-center justify-center bg-bt_primary text-base font-extrabold uppercase text-tx_tertiary md:text-heading_2 ${
           square ? "rounded" : "rounded-full"
         } ${border ? "ring-2 ring-bt_primary" : ""}`}
         style={{ width, height }}>

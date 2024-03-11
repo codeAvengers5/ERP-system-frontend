@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import ReduxProvider from "@/store/ReduxProvider";
@@ -7,12 +6,14 @@ export default function DashboardLayout({ children }) {
   return (
     <ReduxProvider>
       <section>
-        <div className="flex bg-[#F5F8FA]">
+        <div className="flex h-screen">
           <Sidebar />
-          <div className="flex-0 flex w-[100dvw] flex-col">
+          <div className="flex flex-1 flex-col">
             <Navbar />
             <main>
-              <div className="relative overflow-y-auto">{children}</div>
+              <div className="absolute left-0 mx-auto mt-[10px] max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+                {children}
+              </div>
             </main>
           </div>
         </div>

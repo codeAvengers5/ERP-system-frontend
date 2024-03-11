@@ -8,7 +8,7 @@ const CustomSelect = ({ onSelect, title, data, name }) => {
   ));
 
   return (
-    <div className="">
+    <div>
       <select
         name={name}
         className={`h-[51px] w-full rounded-small border-2 border-br_primary bg-[#F5F8FA] px-4 py-2  text-sm focus:outline-none`}

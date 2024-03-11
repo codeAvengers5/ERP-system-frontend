@@ -6,9 +6,9 @@ const FAQ = ({ question, answer }) => {
   };
 
   return (
-    <li className="list-8 custom-list-item mb-[40px] border-b-4 border-[#A3B9FF]">
+    <li className="mb-[40px] border-b-4 border-[#A3B9FF] text-sm md:text-base">
       <div
-        className={`flex cursor-pointer items-center whitespace-nowrap font-bold ${
+        className={`flex cursor-pointer items-center gap-2 font-bold ${
           isOpen ? "text-[#001659]" : "text-[#354370]"
         }`}
         onClick={toggleFAQ}>
@@ -22,11 +22,11 @@ const FAQ = ({ question, answer }) => {
             <circle cx="5" cy="5.5" r="5" fill="black" />
           </svg>
         </div>
-        {question}
-        <div className="mr-2  flex h-[10px] items-center justify-between">
+        <p className="w-full">{question}</p>
+        <div className="flex-end flex h-[10px] items-center">
           {isOpen ? (
             <button
-              className="bg-transparent ml-[1350px] border-none text-[#2B53CF] outline-none"
+              className="bg-transparent border-none text-[#2B53CF] outline-none"
               onClick={toggleFAQ}>
               <svg
                 width="26"
@@ -42,7 +42,7 @@ const FAQ = ({ question, answer }) => {
             </button>
           ) : (
             <button
-              className="bg-transparent ml-[1350px] border-none text-[#2B53CF] outline-none"
+              className="bg-transparent border-none text-[#2B53CF] outline-none"
               onClick={toggleFAQ}>
               <svg
                 width="14"
@@ -61,9 +61,7 @@ const FAQ = ({ question, answer }) => {
           )}
         </div>
       </div>
-      {isOpen && (
-        <div className="mr-[118px] mt-[12px] pl-0 pr-[10px]">{answer}</div>
-      )}
+      {isOpen && <div className="ml-[32px] mt-[12px]">{answer}</div>}
     </li>
   );
 };

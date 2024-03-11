@@ -2,33 +2,39 @@
 import React from "react";
 import Link from "next/link";
 import Image from "../../../../node_modules/next/image";
-import { edit, delet, filter, plus } from "../../../../public/icons/index";
+import { filter, plus } from "../../../../public/icons/index";
 import Displaycard from "@/components/Card";
 import Button from "@/components/Button";
+import { RiEditFill } from "react-icons/ri";
+import { MdDelete } from "react-icons/md";
 
 const page = () => {
   const buttonStyle = {
     width: "200px",
-    height: "50px"
+    height: "60px"
+  };
+  const buttonStyle2 = {
+    width: "100px",
+    height: "40px"
   };
   return (
     <div className="lg:ml-12">
-      <div className="flex flex-row sm:justify-start lg:ml-4 lg:gap-[750px]">
-        <div className="m-1 flex h-auto w-auto items-center justify-center gap-2.5 rounded-[10px] bg-meke-550 p-2.5">
-          <p className="font-['Inter'] text-2xl font-normal text-white">
+      <div className="m-[10px] flex flex-row justify-between">
+        <div className="m-1 flex items-center justify-center gap-2.5 rounded-[10px] bg-meke-550 p-2.5">
+          <p className="font-['Inter'] text-xl font-normal text-white md:text-2xl">
             Policy
           </p>
         </div>
         <div className="flex h-[49px] w-[123px] items-center justify-center gap-2.5 rounded-[10px] p-2.5">
           <Link href="/manager/news">
-            <p className="font-['Inter'] text-2xl font-normal text-black">
+            <p className="font-['Inter'] text-xl font-normal text-black md:text-2xl">
               News
             </p>
           </Link>
         </div>
       </div>
       <div className="mx-4 h-[0px] w-auto border-2 border-meke-550 "></div>
-      <div className="mb-20 mt-6 hidden flex-row justify-end gap-2 px-12 md:flex">
+      <div className="mb-20 mr-[50px] mt-6 hidden flex-row justify-end gap-2 md:flex">
         <Button color="meke-550" style={buttonStyle}>
           <div className=" flex  items-center justify-center gap-[39px] px-[25px]">
             <div className="h-6 w-6">
@@ -45,23 +51,21 @@ const page = () => {
               {" "}
               <Image src={plus} alt="plus" />
             </div>
-            <div className="font-['Roboto'] text-2xl font-normal text-white">
-              Add News
+            <div className="font-['Roboto'] text-xl font-normal text-white">
+              Add Policy
             </div>
           </div>
         </Button>
       </div>
-      <div className="md:hidden">
-        <div className="mt-6 flex justify-start pl-4">
-          <div className="h-10 w-10">
-            <Image src={filter} alt="filter" />
-          </div>
-          <div className="h-10 w-10">
-            <Image src={filter} alt="filter" />
-          </div>
-        </div>
+      <div className="mr-[25px] mt-6 flex justify-end gap-2 pl-4 md:hidden">
+        <Button size="small" color="meke-550" style={buttonStyle2}>
+          <Image src={filter} alt="filter" />
+        </Button>
+        <Button size="small" color="bt_primary" style={buttonStyle2}>
+          <Image src={plus} alt="plus" />
+        </Button>
       </div>
-      <Displaycard variant="card1" margin="20px" backgroundColor="#F0F9FF">
+      <Displaycard variant="card1" margin="20px">
         <div className="flex flex-col gap-[66px] p-16">
           <div className="flex justify-end p-5">
             <div className="font-['Inter'] text-lg font-normal text-black md:text-2xl">
@@ -89,15 +93,15 @@ const page = () => {
             labore et dolore magna aliqua.
           </div>
         </div>
-        <div className="flex flex-row justify-end gap-5">
+        <div className="flex flex-row justify-end gap-5 px-5">
           <button>
-            <Image src={edit} width={24} height={24} alt="image" />
+            <RiEditFill size={24} className="text-bt_additional" />
           </button>
           <p className="font-['Roboto'] text-base font-normal text-black text-opacity-25">
             Edit
           </p>
           <button>
-            <Image src={delet} width={24} height={24} alt="image" />
+            <MdDelete size={24} className="rounded text-bt_tertiary" />
           </button>
           <p className="font-['Roboto'] text-base font-normal text-black text-opacity-25">
             Delete
