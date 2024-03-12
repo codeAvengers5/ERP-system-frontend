@@ -66,7 +66,7 @@ const page = () => {
                 </p>
               </div>
             </Button>
-            <Link href="/it_admin/users/adduser">
+            <Link href="/itadmin/users/adduser">
               <Button
                 color="bt_primary"
                 style={{ width: "300px", height: "60px" }}>

@@ -2,14 +2,14 @@
 import axios from "axios";
 import localStorage from "redux-persist/es/storage";
 
-const API_URI = "http://localhost:8000/mekedonia";
+const API_URI = "http://localhost:8000";
 const register = formData => {
   const config = {
     headers: {
       "Content-Type": "multipart/form-data"
     }
   };
-  return axios.post(API_URI + "registeradmins", formData, config);
+  return axios.post(API_URI + "/registeradmins", formData, config);
 };
 
 const login = async (email, password) => {
