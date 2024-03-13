@@ -23,23 +23,14 @@ const initialState = {
 
 const page = () => {
   const [users, setUser] = useState(initialState);
-  const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-  useEffect(() => {
-    const rememberMeValue = localStorage.getItem("rememberMe") === "true";
-    setRememberMe(rememberMeValue);
-  }, []);
 
   const onInputChange = e => {
     const { name, value } = e.target;
     setUser({ ...users, [name]: value });
   };
 
-  const handleRememberMe = e => {
-    setRememberMe(e.target.checked);
-    localStorage.setItem("rememberMe", e.target.checked);
-  };
   const { user, isLoggedIn } = useSelector(state => state.auth);
 
   useEffect(() => {
@@ -97,23 +88,8 @@ const page = () => {
             value={users.password}
             onChange={onInputChange}
           />
-          <div className="flex w-full flex-col justify-between gap-[10px] align-middle md:flex-row">
-            <div className="flex items-center">
-              <input
-                id="rememberMe"
-                name="rememberMe"
-                type="checkbox"
-                className="h-4 w-4 rounded border-0 text-white accent-meke-600 focus:ring-0"
-                checked={rememberMe}
-                onChange={handleRememberMe}
-              />
-              <label
-                htmlFor="rememberMe"
-                className="ml-2 block text-sm text-tx_link">
-                Remember me
-              </label>
-            </div>
-            <Link href="/" className="text-sm text-tx_link">
+          <div className="flex w-full flex-col justify-end gap-[10px] align-middle md:flex-row">
+            <Link href="/forgotpassword" className="text-sm text-tx_link">
               Forgotpassowrd?
             </Link>
           </div>

@@ -22,7 +22,23 @@ const login = async (email, password) => {
       if (response.data.userInfo.token) {
         localStorage.setItem("user", JSON.stringify(response.data.userInfo));
       }
+      return response.data;
+    });
+};
 
+const forgotPassword = async email => {
+  return axios.post(API_URI + "/forgotpassword", email).then(response => {
+    return response;
+  });
+};
+
+const resetPassword = async data => {
+  return axios
+    .post(API_URI + `/resetpassword/${data.id}/${data.token}`, {
+      password: data.password
+    })
+    .then(response => {
+      console.log(response.data);
       return response.data;
     });
 };
@@ -41,7 +57,9 @@ const authService = {
   register,
   login,
   logout,
-  fetchUserData
+  fetchUserData,
+  forgotPassword,
+  resetPassword
 };
 
 export default authService;
