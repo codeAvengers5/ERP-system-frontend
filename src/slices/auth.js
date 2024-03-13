@@ -28,8 +28,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const data = await authService.login(email, password);
-      console.log(data);
-      return { data };
+      return data;
     } catch (error) {
       const message =
         (error.response &&
@@ -56,8 +55,52 @@ export const fetchUserData = createAsyncThunk(
   }
 );
 
+export const enable2FA = createAsyncThunk(
+  "auth/enable2FA",
+  async ({ Id }, thunkAPI) => {
+    try {
+      const data = await authService.enable2FA({ Id });
+      thunkAPI.dispatch(setMessage(data.message));
+      return data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
+export const verify2FA = createAsyncThunk(
+  "auth/verify2FA",
+  async ({ Id, verificationCode }, thunkAPI) => {
+    try {
+      const data = await authService.verify2FA({ Id, verificationCode });
+      thunkAPI.dispatch(setMessage(data.message));
+      return data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
+
 export const logout = createAsyncThunk("auth/logout", async () => {
   authService.logout();
+});
+
+export const resetState = createAsyncThunk("auth/resetState", async () => {
+  return {};
 });
 
 const initialState = {
@@ -65,7 +108,10 @@ const initialState = {
   user: null,
   loading: false,
   data: [],
-  error: null
+  error: null,
+  status: null,
+  valid: false,
+  data2fa: null
 };
 
 const authSlice = createSlice({
@@ -83,7 +129,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, { payload }) => {
         state.isLoggedIn = true;
         state.loading = false;
-        state.user = payload.data.userInfo;
+        state.user = payload;
       })
       .addCase(login.pending, state => {
         state.loading = true;
@@ -107,6 +153,39 @@ const authSlice = createSlice({
       .addCase(fetchUserData.rejected, state => {
         state.loading = false;
         state.error = "Failed to fetch user data";
+      })
+      .addCase(resetState.fulfilled, state => {
+        return initialState;
+      })
+      .addCase(enable2FA.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+        state.data2fa = null;
+      })
+      .addCase(enable2FA.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        state.data2fa = payload.data;
+      })
+      .addCase(enable2FA.rejected, (state, action) => {
+        state.isLoading = false;
+        state.data2fa = null;
+        state.error = action.error.message;
+      })
+      .addCase(verify2FA.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+        state.valid = false;
+      })
+      .addCase(verify2FA.fulfilled, (state, payload) => {
+        state.isLoading = false;
+        state.error = null;
+        state.valid = payload.otp_valid;
+      })
+      .addCase(verify2FA.rejected, (state, action) => {
+        state.isLoading = false;
+        state.valid = false;
+        state.error = action.error.message;
       });
   }
 });

@@ -40,21 +40,21 @@ const page = () => {
     setRememberMe(e.target.checked);
     localStorage.setItem("rememberMe", e.target.checked);
   };
-  const { user, isLoggedIn } = useSelector(state => state.auth);
+  const { user, enable, valid, isLoggedIn } = useSelector(state => state.auth);
 
   useEffect(() => {
     if (isLoggedIn) {
-      console.log(user, isLoggedIn);
-      userService
-        .getITAdminBoard()
-        .then(response => {
-          console.log(response.data);
-          router.push(user.roleName);
-        })
-        .catch(error => {
-          console.log(error);
-          throw new Error("Unauthorized");
-        });
+      const id = user.userInfo.accountId;
+
+      if (!enable) {
+        router.push(`/enable2fa/${id}`);
+      }
+
+      if (!valid) {
+        router.push(`/verfiy2fa/${id}`);
+      }
+
+      router.push(`/${user.userInfo.roleName}`);
     }
   }, [dispatch, isLoggedIn, router, user]);
 
