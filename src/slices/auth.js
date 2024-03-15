@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
@@ -78,9 +79,11 @@ export const enable2FA = createAsyncThunk(
 export const verify2FA = createAsyncThunk(
   "auth/verify2FA",
   async ({ Id, verificationCode }, thunkAPI) => {
+    console.log("id", Id);
     try {
       const data = await authService.verify2FA({ Id, verificationCode });
       thunkAPI.dispatch(setMessage(data.message));
+      console.log("service response", data);
       return data;
     } catch (error) {
       const message =
@@ -137,6 +140,7 @@ const authSlice = createSlice({
       .addCase(login.rejected, state => {
         state.isLoggedIn = false;
         state.loading = false;
+        state.data2fa = null;
         state.user = null;
       })
       .addCase(logout.fulfilled, state => {
@@ -160,7 +164,6 @@ const authSlice = createSlice({
       .addCase(enable2FA.pending, state => {
         state.isLoading = true;
         state.error = null;
-        state.data2fa = null;
       })
       .addCase(enable2FA.fulfilled, (state, { payload }) => {
         state.isLoading = false;

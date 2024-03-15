@@ -1,8 +1,8 @@
 "use client";
-import Button from "@/components/Button";
-import { enable2FA } from "@/slices/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams, useRouter } from "next/navigation";
+import Button from "../../../components/Button";
+import { enable2FA } from "../../../slices/auth";
 
 const Page = () => {
   const router = useRouter();
@@ -12,7 +12,6 @@ const Page = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
     dispatch(enable2FA({ Id })).then(() => {
       router.push(`/verfiy2fa/${Id}`);
     });
