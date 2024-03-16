@@ -55,6 +55,7 @@ export const updatePassword = async ({ id, oldPassword, newPassword }) => {
   }
 };
 
+
 const logout = () => {
   removeAuthToken();
 };

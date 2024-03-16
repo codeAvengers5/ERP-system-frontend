@@ -63,6 +63,31 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   authService.logout();
 });
 
+export const updatePassword = createAsyncThunk(
+  "auth/updatePassword",
+  async ({ id, oldPassword, newPassword }, thunkAPI) => {
+    try {
+      const response = await authService.updatePassword({
+        id,
+        oldPassword,
+        newPassword
+      });
+      thunkAPI.dispatch(setMessage(response.data.message));
+      return { success: true, message: response.data.message };
+    } catch (error) {
+      console.log("updatePassword error:", error);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return { success: false, message: message };
+    }
+  }
+);
+
 const initialState = {
   isLoggedIn: false,
   user: null,
@@ -115,6 +140,18 @@ const authSlice = createSlice({
       .addCase(fetchUserData.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload; // Setting the error message on data fetch failure
+      })
+      .addCase(updatePassword.pending, state => {
+        state.loading = true;
+        state.error = null; // Clearing any previous errors on update password attempt
+      })
+      .addCase(updatePassword.fulfilled, state => {
+        state.loading = false;
+        state.error = null; // Clearing any previous errors on successful update password
+      })
+      .addCase(updatePassword.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload; // Setting the error message on update password failure
       });
   }
 });
