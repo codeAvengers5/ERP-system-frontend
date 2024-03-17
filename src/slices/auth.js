@@ -244,8 +244,8 @@ const authSlice = createSlice({
       .addCase(updatePassword.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = "Failed to fetch user data";
-      });
-    addCase(enable2FA.pending, state => {
+      })
+      .addCase(enable2FA.pending, state => {
       state.isLoading = true;
       state.error = null;
       state.data2fa = null;
