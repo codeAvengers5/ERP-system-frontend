@@ -15,6 +15,7 @@ import { CustomErrorViewer } from "@/components/errorviwer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dynamic from "next/dynamic";
+import { useRouter } from "../../node_modules/next/navigation";
 const PasswordChecklist = dynamic(() => import("react-password-checklist"), {
   ssr: false
 });
@@ -41,7 +42,6 @@ const Page = () => {
   const { user, isLoggedIn, error } = useSelector(state => state.auth);
 
   useEffect(() => {
-    const router = require("next/router").default;
     if (isLoggedIn) {
       console.log(user, isLoggedIn);
       userService
