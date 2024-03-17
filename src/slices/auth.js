@@ -246,10 +246,10 @@ const authSlice = createSlice({
         state.error = "Failed to fetch user data";
       })
       .addCase(enable2FA.pending, state => {
-      state.isLoading = true;
-      state.error = null;
-      state.data2fa = null;
-    })
+        state.isLoading = true;
+        state.error = null;
+        state.data2fa = null;
+      })
       .addCase(enable2FA.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
