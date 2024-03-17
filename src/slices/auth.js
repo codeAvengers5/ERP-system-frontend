@@ -60,7 +60,6 @@ export const fetchUserData = createAsyncThunk(
   }
 );
 
-
 export const enable2FA = createAsyncThunk(
   "auth/enable2FA",
   async ({ Id }, thunkAPI) => {
@@ -69,6 +68,17 @@ export const enable2FA = createAsyncThunk(
       thunkAPI.dispatch(setMessage(data.message));
       return data;
     } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 
 export const forgotPassword = createAsyncThunk(
   "auth/forgotpassword",
@@ -91,15 +101,25 @@ export const forgotPassword = createAsyncThunk(
   }
 );
 
-
 export const verify2FA = createAsyncThunk(
   "auth/verify2FA",
   async ({ Id, verificationCode }, thunkAPI) => {
-    console.log("id", Id);
     try {
       const data = await authService.verify2FA({ Id, verificationCode });
       thunkAPI.dispatch(setMessage(data.message));
-      console.log("service response", data);
+      return data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue();
+    }
+  }
+);
 
 export const resetPassword = createAsyncThunk(
   "auth/resetPassword",
@@ -124,7 +144,6 @@ export const resetPassword = createAsyncThunk(
 export const logout = createAsyncThunk("auth/logout", async () => {
   authService.logout();
 });
-
 
 export const resetState = createAsyncThunk("auth/resetState", async () => {
   return {};
@@ -163,7 +182,7 @@ const initialState = {
   error: null,
   status: null,
   valid: false,
-  data2fa: null
+  data2fa: null,
   success: false,
   msg: null
 };
@@ -225,11 +244,12 @@ const authSlice = createSlice({
       .addCase(updatePassword.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = "Failed to fetch user data";
-      })
-      .addCase(enable2FA.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      });
+    addCase(enable2FA.pending, state => {
+      state.isLoading = true;
+      state.error = null;
+      state.data2fa = null;
+    })
       .addCase(enable2FA.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
@@ -253,6 +273,8 @@ const authSlice = createSlice({
       .addCase(verify2FA.rejected, (state, action) => {
         state.isLoading = false;
         state.valid = false;
+        state.error = action.error.message;
+      })
       .addCase(forgotPassword.pending, state => {
         state.loading = true;
         state.error = null;

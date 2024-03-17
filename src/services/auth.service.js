@@ -29,7 +29,6 @@ const login = async (email, password) => {
           response.data.token,
           JSON.stringify(response.data.userInfo)
         );
-
       }
       return response.data;
     });
@@ -48,8 +47,8 @@ const verify2FA = async ({ Id, verificationCode }) => {
     })
     .then(response => {
       console.log(response);
-  }
- }
+    });
+};
 
 const forgotPassword = async email => {
   return axios.post(API_URI + "/forgotpassword", email).then(response => {

@@ -39,7 +39,6 @@ const Page = () => {
     setErrors(validationErrors);
   };
 
-
   const { user, enable, valid, isLoggedIn } = useSelector(state => state.auth);
 
   useEffect(() => {
@@ -64,7 +63,6 @@ const Page = () => {
           console.log("log error", error.response.status);
           throw new Error("Unauthorized");
         });
-
     }
   }, [dispatch, isLoggedIn, user]);
   useEffect(() => {
