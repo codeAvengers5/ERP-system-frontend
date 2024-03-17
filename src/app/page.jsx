@@ -39,11 +39,22 @@ const Page = () => {
     setErrors(validationErrors);
   };
 
-  const { user, isLoggedIn, error } = useSelector(state => state.auth);
+  const { user, enable, valid, isLoggedIn, error } = useSelector(
+    state => state.auth
+  );
 
   useEffect(() => {
     if (isLoggedIn) {
-      console.log(user, isLoggedIn);
+      const id = user.userInfo.accountId;
+
+      if (!enable) {
+        router.push(`/enable2fa/${id}`);
+      }
+
+      if (!valid) {
+        router.push(`/verfiy2fa/${id}`);
+      }
+
       userService
         .getITAdminBoard()
         .then(response => {

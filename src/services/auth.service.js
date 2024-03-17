@@ -1,7 +1,9 @@
 "use client";
 import axios from "axios";
+
 //import localStorage from "redux-persist/es/storage";
 import { setAuthToken } from "@/util/storage";
+
 const API_URI = "http://localhost:8000";
 const register = formData => {
   const config = {
@@ -29,6 +31,22 @@ const login = async (email, password) => {
         );
       }
       return response.data;
+    });
+};
+
+const enable2FA = async data => {
+  return axios.post(API_URI + `/enable2fa/${data.Id}`).then(response => {
+    return response.data;
+  });
+};
+
+const verify2FA = async ({ Id, verificationCode }) => {
+  return axios
+    .post(API_URI + `/verify2fa/${Id}`, {
+      token: verificationCode
+    })
+    .then(response => {
+      console.log(response);
     });
 };
 
@@ -76,6 +94,8 @@ const authService = {
   login,
   logout,
   fetchUserData,
+  enable2FA,
+  verify2FA,
   forgotPassword,
   resetPassword,
   updatePassword
