@@ -41,6 +41,12 @@ export const validate = (data: any) => {
     } else if(data.password.length < 6) {
       errors.password = "Password must be at least 6 characters long";
     }
+    if (!data.oldPassword) {
+      errors.oldPassword= "Password is required";
+    } else if(data.oldPassword.length < 6) {
+      errors.oldPassword = "Password must be at least 6 characters long";
+    }
+   
    
     return errors;
   };
