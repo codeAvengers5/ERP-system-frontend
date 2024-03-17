@@ -39,7 +39,7 @@ const Page = () => {
     setErrors(validationErrors);
   };
 
-  const { user, enable, valid, isLoggedIn } = useSelector(state => state.auth);
+  const { user, enable, valid, isLoggedIn, error } = useSelector(state => state.auth);
 
   useEffect(() => {
     if (isLoggedIn) {
