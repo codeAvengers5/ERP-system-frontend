@@ -1,6 +1,9 @@
 "use client";
 import axios from "axios";
-import localStorage from "redux-persist/es/storage";
+
+//import localStorage from "redux-persist/es/storage";
+import { setAuthToken } from "@/util/storage";
+
 const API_URI = "http://localhost:8000";
 const register = formData => {
   const config = {
@@ -18,8 +21,15 @@ const login = async (email, password) => {
       password
     })
     .then(response => {
-      if (response.data.userInfo) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+      console.log("service", response.data.token);
+      if (response.data.token) {
+        // console.log("tok",response.data.token)
+        // console.log("dd",JSON.stringify(response.data.userInfo))
+        setAuthToken(
+          response.data.token,
+          JSON.stringify(response.data.userInfo)
+        );
+
       }
       return response.data;
     });
@@ -38,12 +48,40 @@ const verify2FA = async ({ Id, verificationCode }) => {
     })
     .then(response => {
       console.log(response);
+  }
+ }
+
+const forgotPassword = async email => {
+  return axios.post(API_URI + "/forgotpassword", email).then(response => {
+    return response;
+  });
+};
+
+const resetPassword = async data => {
+  return axios
+    .post(API_URI + `/resetpassword/${data.id}/${data.token}`, {
+      password: data.password
+    })
+    .then(response => {
+      console.log(response.data);
       return response.data;
     });
 };
 
+export const updatePassword = async ({ id, oldPassword, newPassword }) => {
+  try {
+    const response = await axios.post(API_URI + `/updatepassword/${id}`, {
+      oldPassword,
+      newPassword
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const logout = () => {
-  localStorage.removeItem("user");
+  removeAuthToken();
 };
 
 const fetchUserData = async () => {
@@ -58,7 +96,10 @@ const authService = {
   logout,
   fetchUserData,
   enable2FA,
-  verify2FA
+  verify2FA,
+  forgotPassword,
+  resetPassword,
+  updatePassword
 };
 
 export default authService;
