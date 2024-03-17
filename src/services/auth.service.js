@@ -32,17 +32,23 @@ const login = async (email, password) => {
     });
 };
 
-// const updatePassword = async (id, oldPassword, newPassword) => {
-//   try {
-//     const response = await axios.put(API_URI+`api/password/${id}`, {
-//       oldPassword,
-//       newPassword,
-//     });
-//     return response.data;
-//   } catch (error) {
-//     throw error.response.data;
-//   }
-// };
+const forgotPassword = async email => {
+  return axios.post(API_URI + "/forgotpassword", email).then(response => {
+    return response;
+  });
+};
+
+const resetPassword = async data => {
+  return axios
+    .post(API_URI + `/resetpassword/${data.id}/${data.token}`, {
+      password: data.password
+    })
+    .then(response => {
+      console.log(response.data);
+      return response.data;
+    });
+};
+
 export const updatePassword = async ({ id, oldPassword, newPassword }) => {
   try {
     const response = await axios.post(API_URI + `/updatepassword/${id}`, {
@@ -70,6 +76,8 @@ const authService = {
   login,
   logout,
   fetchUserData,
+  forgotPassword,
+  resetPassword,
   updatePassword
 };
 

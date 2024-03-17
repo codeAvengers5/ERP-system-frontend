@@ -15,6 +15,7 @@ import { CustomErrorViewer } from "@/components/errorviwer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dynamic from "next/dynamic";
+import { useRouter } from "../../node_modules/next/navigation";
 const PasswordChecklist = dynamic(() => import("react-password-checklist"), {
   ssr: false
 });
@@ -26,9 +27,9 @@ const initialState = {
 
 const Page = () => {
   const [users, setUser] = useState(initialState);
+  const router = useRouter();
   const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
 
   const onInputChange = e => {
@@ -38,15 +39,9 @@ const Page = () => {
     setErrors(validationErrors);
   };
 
-  const handleRememberMe = e => {
-    setRememberMe(e.target.checked);
-    localStorage.setItem("rememberMe", e.target.checked);
-  };
-
   const { user, isLoggedIn, error } = useSelector(state => state.auth);
 
   useEffect(() => {
-    const router = require("next/router").default;
     if (isLoggedIn) {
       console.log(user, isLoggedIn);
       userService
@@ -129,22 +124,7 @@ const Page = () => {
               />
             )}
           </div>
-          <div className="flex w-full flex-col justify-between gap-[10px] align-middle md:flex-row">
-            <div className="flex items-center">
-              <input
-                id="rememberMe"
-                name="rememberMe"
-                type="checkbox"
-                className="h-4 w-4 rounded border-0 text-white accent-meke-600 focus:ring-0"
-                checked={rememberMe}
-                onChange={handleRememberMe}
-              />
-              <label
-                htmlFor="rememberMe"
-                className="ml-2 block text-sm text-tx_link">
-                Remember me
-              </label>
-            </div>
+          <div className="w-full rounded-md bg-white p-6 shadow-lg sm:max-w-md">
             <Link href="/" className="text-sm text-tx_link">
               Forgot Password?
             </Link>
