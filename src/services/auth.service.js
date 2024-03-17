@@ -77,7 +77,7 @@ const authService = {
   logout,
   fetchUserData,
   forgotPassword,
-  resetPassword
+  resetPassword,
   updatePassword
 };
 

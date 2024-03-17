@@ -38,9 +38,7 @@ const Page = () => {
     setErrors(validationErrors);
   };
 
-
   const { user, isLoggedIn, error } = useSelector(state => state.auth);
-
 
   useEffect(() => {
     const router = require("next/router").default;
