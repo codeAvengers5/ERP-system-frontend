@@ -1,10 +1,11 @@
 import React from "react";
 
-const TextArea = ({ placeholder, value, onChange, rows, cols }) => {
+const TextArea = ({ placeholder, name, value, onChange, rows, cols }) => {
   return (
     <textarea
       placeholder={placeholder}
       value={value}
+      name={name}
       onChange={onChange}
       rows={rows}
       cols={cols}

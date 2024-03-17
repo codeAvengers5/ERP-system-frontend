@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
-import localStorage from "redux-persist/es/storage";
-
+//import localStorage from "redux-persist/es/storage";
+import { setAuthToken } from "@/util/storage";
 const API_URI = "http://localhost:8000";
 const register = formData => {
   const config = {
@@ -19,8 +19,14 @@ const login = async (email, password) => {
       password
     })
     .then(response => {
-      if (response.data.userInfo.token) {
-        localStorage.setItem("user", JSON.stringify(response.data.userInfo));
+      console.log("service", response.data.token);
+      if (response.data.token) {
+        // console.log("tok",response.data.token)
+        // console.log("dd",JSON.stringify(response.data.userInfo))
+        setAuthToken(
+          response.data.token,
+          JSON.stringify(response.data.userInfo)
+        );
       }
       return response.data;
     });
@@ -43,8 +49,20 @@ const resetPassword = async data => {
     });
 };
 
+export const updatePassword = async ({ id, oldPassword, newPassword }) => {
+  try {
+    const response = await axios.post(API_URI + `/updatepassword/${id}`, {
+      oldPassword,
+      newPassword
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const logout = () => {
-  localStorage.removeItem("user");
+  removeAuthToken();
 };
 
 const fetchUserData = async () => {
@@ -60,6 +78,7 @@ const authService = {
   fetchUserData,
   forgotPassword,
   resetPassword
+  updatePassword
 };
 
 export default authService;
