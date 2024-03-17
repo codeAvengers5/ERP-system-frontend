@@ -135,8 +135,8 @@ const Page = () => {
               />
             )}
           </div>
-          <div className="w-full rounded-md bg-white p-6 shadow-lg sm:max-w-md">
-            <Link href="/" className="text-sm text-tx_link">
+          <div className="w-full sm:max-w-md">
+            <Link href="/forgotpassword" className="text-sm text-tx_link">
               Forgot Password?
             </Link>
           </div>
