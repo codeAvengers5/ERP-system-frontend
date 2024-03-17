@@ -1,7 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable import/no-unresolved */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -14,7 +10,14 @@ import InputField from "@/components/InputField";
 import Text from "@/components/TextField";
 import { register } from "@/slices/auth";
 import { clearMessage } from "@/slices/message";
-
+import { validate } from "@/util/validate";
+import { CustomErrorViewer } from "@/components/errorviwer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import dynamic from "../../../../../node_modules/next/dynamic";
+const PasswordChecklist = dynamic(() => import("react-password-checklist"), {
+  ssr: false
+});
 const initialState = {
   full_name: "",
   email: "",
@@ -32,7 +35,8 @@ const page = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [imagebox, setImageBox] = useState(false);
   const [successful, setSuccessful] = useState(false);
-
+  const [errors, setErrors] = useState({});
+  const [signupError, setSignupError] = useState("");
   const { message } = useSelector(state => state.message);
   const dispatch = useDispatch();
 
@@ -64,6 +68,8 @@ const page = () => {
       ...prevState,
       [name]: value
     }));
+    const validationErrors = validate(user);
+    setErrors(validationErrors);
   };
 
   const handlePreviewLoad = index => {
@@ -91,12 +97,33 @@ const page = () => {
       .then(() => {
         setSuccessful(true);
       })
-      .catch(() => {
+      .catch(error => {
+        console.log(error, "error from");
+        if (error) {
+          setSignupError(error);
+          toast.error("Registration Failed!");
+        } else {
+          // If there is no specific error message in the response, set a general message
+          setSignupError("Registration failed. Please try again later.");
+          toast.error("Registration Failed!");
+        }
         setSuccessful(false);
       });
 
     setUser(initialState);
   };
+
+  // useEffect(() => {
+  //   if (message) {
+  //     setSignupError(message);
+  //     toast.error("Login Failed!");
+  //    }// else if (isLoggedIn) {
+
+  //   //   // Handle the success status
+  //   //    toast.success("Login successful!");
+  //   //   // Perform any necessary actions on success
+  //   // }
+  // }, [message]);
 
   const genderdata = [
     { name: "Male", value: "male" },
@@ -109,20 +136,8 @@ const page = () => {
   ];
   return (
     <div className="flex justify-center">
-      <div className="align-self-end">
-        {message && (
-          <div>
-            <div
-              className={
-                successful ? "alert alert-success" : "alert alert-danger"
-              }
-              role="alert">
-              {message}
-            </div>
-          </div>
-        )}
-      </div>
       <Displaycard variant="card2">
+        <span className="text-center  text-meke-200">{signupError}</span>
         <FormWrapper onSubmit={handleSubmit}>
           <div>
             <Text
@@ -136,6 +151,10 @@ const page = () => {
               value={user.full_name}
               onChange={onInputChange}
             />
+            <CustomErrorViewer
+              isShow={errors.full_name != ""}
+              text={errors.full_name}
+            />
           </div>
           <div>
             <Text className="pb-[5px] md:pb-[10px]" content="Email" />
@@ -145,6 +164,10 @@ const page = () => {
               name="email"
               value={user.email}
               onChange={onInputChange}
+            />
+            <CustomErrorViewer
+              isShow={errors.email != ""}
+              text={errors.email}
             />
           </div>
           <div>
@@ -156,6 +179,11 @@ const page = () => {
               value={user.password}
               onChange={onInputChange}
             />
+
+            <CustomErrorViewer
+              isShow={errors.password != ""}
+              text={errors.password}
+            />
           </div>
           <div>
             <Text className="pb-[5px] md:pb-[10px]" content="Position" />
@@ -165,6 +193,10 @@ const page = () => {
               name="position"
               value={user.position}
               onChange={onInputChange}
+            />
+            <CustomErrorViewer
+              isShow={errors.position != ""}
+              text={errors.position}
             />
           </div>
           <div>
@@ -176,6 +208,10 @@ const page = () => {
               title="Select role"
               onSelect={onInputChange}
             />
+            <CustomErrorViewer
+              isShow={errors.role_name != ""}
+              text={errors.role_name}
+            />
           </div>
           <div>
             <Text className="pb-[14px]" content="Work start date" />
@@ -186,6 +222,10 @@ const page = () => {
               value={user.start_date}
               onChange={onInputChange}
             />
+            <CustomErrorViewer
+              isShow={errors.start_date != ""}
+              text={errors.start_date}
+            />
           </div>
           <div>
             <Text className="pb-[5px] md:pb-[10px]" content="Salary/Wage" />
@@ -195,6 +235,10 @@ const page = () => {
               name="salary"
               value={user.salary}
               onChange={onInputChange}
+            />
+            <CustomErrorViewer
+              isShow={errors.salary != ""}
+              text={errors.salary}
             />
           </div>
           <div>
@@ -258,6 +302,12 @@ const page = () => {
             </Button>
           </div>
         </FormWrapper>
+
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          className="absolute right-0 top-0 mt-20 w-[40px] max-w-sm p-4"
+        />
       </Displaycard>
     </div>
   );
