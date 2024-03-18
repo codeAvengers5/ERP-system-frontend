@@ -39,34 +39,39 @@ const Page = () => {
     setErrors(validationErrors);
   };
 
-  const { user, enable, valid, isLoggedIn, error } = useSelector(
+  const { user, valid, isLoggedIn, error } = useSelector(
     state => state.auth
   );
 
   useEffect(() => {
-    if (isLoggedIn) {
-      const id = user.userInfo.accountId;
-
-      if (!enable) {
-        router.push(`/enable2fa/${id}`);
+    const proceedSteps = () => {
+      if (isLoggedIn) {
+        const id = user.accountId;
+        const enable = user.enable2fa;
+  
+        if (!enable) {
+          router.push(`/enable2fa/${id}`, () => {
+            if (!valid) {
+              router.push(`/verfiy2fa/${id}`, () => {
+                router.push(`/${user.roleName}/dashboard`);
+              });
+            } else {
+              router.push(`/${user.roleName}/dashboard`);
+            }
+          });
+        } else if (!valid) {
+          router.push(`/verfiy2fa/${id}`, () => {
+            router.push(`/${user.roleName}/dashboard`);
+          });
+        } else {
+          router.push(`/${user.roleName}/dashboard`);
+        }
       }
-
-      if (!valid) {
-        router.push(`/verfiy2fa/${id}`);
-      }
-
-      userService
-        .getITAdminBoard()
-        .then(response => {
-          console.log("this log", response.data);
-          router.push(user.roleName);
-        })
-        .catch(error => {
-          console.log("log error", error.response.status);
-          throw new Error("Unauthorized");
-        });
-    }
+    };
+  
+    proceedSteps();
   }, [dispatch, isLoggedIn, user]);
+
   useEffect(() => {
     if (error) {
       setLoginError(error);

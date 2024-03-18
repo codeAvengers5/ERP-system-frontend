@@ -18,6 +18,7 @@ import { IoLogOut } from "react-icons/io5";
 import { BsPersonCheckFill } from "react-icons/bs";
 import { FcAdvertising } from "react-icons/fc";
 import { usePathname, useRouter } from "../../node_modules/next/navigation";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
   const menus = {
@@ -161,10 +162,13 @@ const Sidebar = () => {
   const pathName = usePathname();
   const router = useRouter();
 
+  const { user } = useSelector(
+    state => state.auth
+  );
+
   useEffect(() => {
-    let user = true;
     if (user) {
-      setUserRole("itAdmin");
+      setUserRole(user.roleName);
     }
   }, [userRole]);
 

@@ -43,9 +43,6 @@ const page = () => {
     return <p>Error: {error}</p>;
   }
 
-  if (data) {
-    console.log(data);
-  }
 
   return (
     <div>

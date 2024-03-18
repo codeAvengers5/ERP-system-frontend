@@ -1,5 +1,4 @@
 export const setAuthToken = (token, user) => {
-  console.log("set", typeof window);
   if (typeof window !== "undefined") {
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(user));

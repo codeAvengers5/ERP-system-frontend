@@ -52,14 +52,8 @@ const page = () => {
       ...files.map(file => URL.createObjectURL(file))
     ]);
     Array.from(files).forEach(file => {
-      console.log(file);
       user.images.append("images", file);
     });
-    console.log(user.images.has("images"));
-    console.log(user.images.get("images"));
-    for (const [key, value] of user.images.entries()) {
-      console.log(key, value);
-    }
     setUser({ ...user });
   };
   const onInputChange = e => {
@@ -91,14 +85,12 @@ const page = () => {
     for (const [key, file] of user.images.entries()) {
       formData.append(key, file);
     }
-    console.log(...formData.entries());
     dispatch(register(formData))
       .unwrap()
       .then(() => {
         setSuccessful(true);
       })
       .catch(error => {
-        console.log(error, "error from");
         if (error) {
           setSignupError(error);
           toast.error("Registration Failed!");

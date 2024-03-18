@@ -6,10 +6,11 @@ import { useParams, useRouter } from "next/navigation";
 import { verify2FA } from "../../../slices/auth";
 import InputField from "../../../components/InputField";
 import Button from "../../../components/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Page = () => {
   const [verificationCode, setVerificationCode] = useState("");
-  const [invalidCode, setInvalidCode] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [image, setImage] = useState(null);
   const router = useRouter();
@@ -17,27 +18,25 @@ const Page = () => {
   const dispatch = useDispatch();
   const { Id } = useParams();
 
-  const { data2fa } = useSelector(state => state.auth);
-  const { user } = useSelector(state => state.auth);
+  const { user, data2fa, error } = useSelector(state => state.auth);
 
   const handleSubmit = e => {
     e.preventDefault();
 
     dispatch(verify2FA({ Id, verificationCode }))
-      .then(() => {
-        router.push("/employee");
-        console.log("......wating");
+      .then(() => { 
+        toast.success('confrimed!')
+        router.push('/'); 
       })
-      .catch(() => {
-        setInvalidCode(true);
-      });
+
+        if (error) {
+          toast.error(error);
+        }
   };
 
+
   useEffect(() => {
-    //user is null....
-    console.log(user.userInfo);
-    console.log(data2fa);
-    setEnabled(user.userInfo.enable2fa);
+    setEnabled(user.enable2fa);
     if (data2fa) {
       setImage(data2fa.qrCodeUrl);
     }
@@ -66,7 +65,11 @@ const Page = () => {
             Confirm
           </Button>
 
-          {invalidCode && <p>Invalid verification code</p>}
+          <ToastContainer
+            limit={1}
+            position="top-right"
+            autoClose={3000}
+            className="absolute right-0 top-0 mt-20 w-[40px] max-w-sm p-4" />
         </form>
       </div>
     </div>

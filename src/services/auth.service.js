@@ -21,10 +21,7 @@ const login = async (email, password) => {
       password
     })
     .then(response => {
-      console.log("service", response.data.token);
       if (response.data.token) {
-        // console.log("tok",response.data.token)
-        // console.log("dd",JSON.stringify(response.data.userInfo))
         setAuthToken(
           response.data.token,
           JSON.stringify(response.data.userInfo)
@@ -46,7 +43,7 @@ const verify2FA = async ({ Id, verificationCode }) => {
       token: verificationCode
     })
     .then(response => {
-      console.log(response);
+      return(response.data);
     });
 };
 
@@ -62,7 +59,6 @@ const resetPassword = async data => {
       password: data.password
     })
     .then(response => {
-      console.log(response.data);
       return response.data;
     });
 };
@@ -86,7 +82,6 @@ const logout = () => {
 const fetchUserData = async () => {
   const response = await fetch(API_URI + "/users");
   const data = await response.json();
-  console.log(data);
   return data;
 };
 const authService = {

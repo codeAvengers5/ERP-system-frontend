@@ -11,7 +11,6 @@ export const register = createAsyncThunk(
       thunkAPI.dispatch(setMessage(response.data.message));
       return response.data;
     } catch (error) {
-      console.log("eee", error);
       const message =
         (error.response &&
           error.response.data &&
@@ -29,7 +28,6 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const data = await authService.login(email, password);
-      console.log("this is", data);
       return { data };
     } catch (error) {
       const message =
@@ -40,7 +38,6 @@ export const login = createAsyncThunk(
         error.toString();
       // Dispatching the error message to setMessage action
       thunkAPI.dispatch(setMessage(message));
-      console.log("res error", error.response.data.Error);
       // Returning the rejected value along with the error message
       return thunkAPI.rejectWithValue(error.response.data.Error);
     }
@@ -54,7 +51,6 @@ export const fetchUserData = createAsyncThunk(
       const data = await authService.fetchUserData();
       return data;
     } catch (error) {
-      console.log(error);
       throw new Error(error.message || "Failed to fetch user data");
     }
   }
@@ -88,7 +84,6 @@ export const forgotPassword = createAsyncThunk(
       thunkAPI.dispatch(setMessage(data.message));
       return data;
     } catch (error) {
-      console.log(error);
       const message =
         (error.response &&
           error.response.data &&
@@ -116,7 +111,7 @@ export const verify2FA = createAsyncThunk(
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -161,7 +156,6 @@ export const updatePassword = createAsyncThunk(
       thunkAPI.dispatch(setMessage(response.data.message));
       return { success: true, message: response.data.message };
     } catch (error) {
-      console.log("updatePassword error:", error);
       const message =
         (error.response &&
           error.response.data &&
@@ -265,15 +259,15 @@ const authSlice = createSlice({
         state.error = null;
         state.valid = false;
       })
-      .addCase(verify2FA.fulfilled, (state, payload) => {
+      .addCase(verify2FA.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.valid = payload.otp_valid;
+        state.valid = action.payload.data.otp_valid;
       })
-      .addCase(verify2FA.rejected, (state, action) => {
+      .addCase(verify2FA.rejected, (state, {payload}) => {
         state.isLoading = false;
         state.valid = false;
-        state.error = action.error.message;
+        state.error = payload;
       })
       .addCase(forgotPassword.pending, state => {
         state.loading = true;
