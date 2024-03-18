@@ -23,17 +23,15 @@ const Page = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    dispatch(verify2FA({ Id, verificationCode }))
-      .then(() => { 
-        toast.success('confrimed!')
-        router.push('/'); 
-      })
+    dispatch(verify2FA({ Id, verificationCode })).then(() => {
+      toast.success("confrimed!");
+      router.push("/");
+    });
 
-        if (error) {
-          toast.error(error);
-        }
+    if (error) {
+      toast.error(error);
+    }
   };
-
 
   useEffect(() => {
     setEnabled(user.enable2fa);
@@ -69,7 +67,8 @@ const Page = () => {
             limit={1}
             position="top-right"
             autoClose={3000}
-            className="absolute right-0 top-0 mt-20 w-[40px] max-w-sm p-4" />
+            className="absolute right-0 top-0 mt-20 w-[40px] max-w-sm p-4"
+          />
         </form>
       </div>
     </div>

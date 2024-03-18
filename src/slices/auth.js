@@ -264,7 +264,7 @@ const authSlice = createSlice({
         state.error = null;
         state.valid = action.payload.data.otp_valid;
       })
-      .addCase(verify2FA.rejected, (state, {payload}) => {
+      .addCase(verify2FA.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.valid = false;
         state.error = payload;

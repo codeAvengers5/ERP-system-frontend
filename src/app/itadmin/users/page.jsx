@@ -43,7 +43,6 @@ const page = () => {
     return <p>Error: {error}</p>;
   }
 
-
   return (
     <div>
       <div className="m-[10px] flex flex-col justify-between">

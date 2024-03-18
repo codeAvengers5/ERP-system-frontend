@@ -39,16 +39,14 @@ const Page = () => {
     setErrors(validationErrors);
   };
 
-  const { user, valid, isLoggedIn, error } = useSelector(
-    state => state.auth
-  );
+  const { user, valid, isLoggedIn, error } = useSelector(state => state.auth);
 
   useEffect(() => {
     const proceedSteps = () => {
       if (isLoggedIn) {
         const id = user.accountId;
         const enable = user.enable2fa;
-  
+
         if (!enable) {
           router.push(`/enable2fa/${id}`, () => {
             if (!valid) {
@@ -68,7 +66,7 @@ const Page = () => {
         }
       }
     };
-  
+
     proceedSteps();
   }, [dispatch, isLoggedIn, user]);
 

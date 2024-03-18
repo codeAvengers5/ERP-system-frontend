@@ -43,7 +43,7 @@ const verify2FA = async ({ Id, verificationCode }) => {
       token: verificationCode
     })
     .then(response => {
-      return(response.data);
+      return response.data;
     });
 };
 

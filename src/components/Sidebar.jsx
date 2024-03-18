@@ -162,9 +162,7 @@ const Sidebar = () => {
   const pathName = usePathname();
   const router = useRouter();
 
-  const { user } = useSelector(
-    state => state.auth
-  );
+  const { user } = useSelector(state => state.auth);
 
   useEffect(() => {
     if (user) {
