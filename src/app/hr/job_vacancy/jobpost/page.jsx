@@ -64,7 +64,7 @@ const Page = () => {
       <Displaycard variant="card2">
         <FormWrapper
           onSubmit={handleSubmit}
-          className="flex flex-col gap-5 py-16 pl-3">
+          className="flex flex-col gap-5 py-3 pl-3">
           <span className="text-center  text-meke-200">{signupError}</span>
           <div>
             <Text className="pb-[5px] md:pb-[10px]" content="Title_of_job" />
