@@ -74,11 +74,11 @@ const Sidebar = () => {
         icon: <BiSolidHelpCircle size={33} />
       }
     ],
-    hr: [
+    hradmin: [
       {
         id: 1,
         name: "Dashboard",
-        href: "/hr/dashboard",
+        href: "/hradmin/dashboard",
         icon: <BiSolidDashboard size={33} />
       },
       {
@@ -90,37 +90,37 @@ const Sidebar = () => {
       {
         id: 3,
         name: "Recruitment",
-        href: "/hr/job_vacancy",
+        href: "/hradmin/job_vacancy",
         icon: <MdWork size={33} />
       },
       {
         id: 4,
         name: "Event",
-        href: "/hr/event",
+        href: "/hradmin/event",
         icon: <MdEventAvailable size={33} />
       },
       {
         id: 5,
         name: "Employee",
-        href: "/hr/employees",
+        href: "/hradmin/employees",
         icon: <MdPeople size={33} />
       },
       {
         id: 6,
         name: "Leave Application",
-        href: "/hr/leave",
+        href: "/hradmin/leave",
         icon: <IoLogOut size={33} />
       },
       {
         id: 7,
         name: "Attendance",
-        href: "/hr/attendance",
+        href: "/hradmin/attendance",
         icon: <BsPersonCheckFill size={33} />
       },
       {
         id: 8,
         name: "Promotion",
-        href: "/hr/promotion",
+        href: "/hradmin/promotion",
         icon: <FcAdvertising size={33} />
       },
       {
