@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setMessage } from "./message";
 import authService from "../services/auth.service";
+import authHeader from "@/services/auth-header";
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -41,6 +42,22 @@ export const login = createAsyncThunk(
       // Returning the rejected value along with the error message
       return thunkAPI.rejectWithValue(error.response.data.Error);
     }
+  }
+);
+
+export const initializeUserFromCookie = createAsyncThunk(
+  "auth/initializeUserFromCookie",
+  async (_, thunkAPI) => {
+    const userCookie = authHeader();
+    if (userCookie) {
+      try {
+        return userCookie.user.userInfo;
+      } catch (error) {
+        // Handle any potential errors during decoding or parsing
+        console.error("Error parsing user cookie:", error);
+      }
+    }
+    return null;
   }
 );
 
@@ -171,6 +188,7 @@ export const updatePassword = createAsyncThunk(
 const initialState = {
   isLoggedIn: false,
   user: null,
+  cookieuser: null,
   loading: false,
   data: [],
   error: null,

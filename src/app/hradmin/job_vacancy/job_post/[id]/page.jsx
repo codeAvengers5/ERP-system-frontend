@@ -14,7 +14,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { validate } from "@/util/validate";
 import { getJobPostById } from "@/services/job.service";
-const Page = ({ params }) => {
+import { useParams } from "../../../../../../node_modules/next/navigation";
+const Page = () => {
   const [job, setJob] = useState({
     title: "",
     description: "",
@@ -26,14 +27,12 @@ const Page = ({ params }) => {
   const dispatch = useDispatch();
   const [signupError, setSignupError] = useState("");
   const { loading, success, error } = useSelector(state => state.jobPost);
-  const id = params.id;
-  console.log(id);
+  const { id } = useParams();
   useEffect(() => {
     if (id) {
       const fetchJobPost = async () => {
         try {
           const jobPost = await getJobPostById(id);
-          console.log("title", jobPost.data.title);
           setJob({
             title: jobPost.data.title,
             description: jobPost.data.description,
@@ -73,7 +72,7 @@ const Page = ({ params }) => {
     if (success) {
       toast.success("Job post updated successfully");
       setTimeout(() => {
-        window.location.href = "/hr/job_vacancy"; // Navigate to jobvacancy page after delay
+        window.location.href = "/hradmin/job_vacancy"; // Navigate to jobvacancy page after delay
       }, 2000); // 2000 milliseconds (2 seconds) delay
       dispatch(clearStatus());
     }

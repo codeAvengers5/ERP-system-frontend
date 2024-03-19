@@ -18,7 +18,8 @@ import { IoLogOut } from "react-icons/io5";
 import { BsPersonCheckFill } from "react-icons/bs";
 import { FcAdvertising } from "react-icons/fc";
 import { usePathname, useRouter } from "../../node_modules/next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { initializeUserFromCookie } from "@/slices/auth";
 
 const Sidebar = () => {
   const menus = {
@@ -161,14 +162,16 @@ const Sidebar = () => {
   const [userRole, setUserRole] = useState("");
   const pathName = usePathname();
   const router = useRouter();
-
-  const { user } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user) {
-      setUserRole(user.roleName);
-    }
-  }, [userRole]);
+    dispatch(initializeUserFromCookie()).then(res => {
+      if (res) {
+        const role = res.payload.roleName;
+        setUserRole(role);
+      }
+    });
+  }, []);
 
   const userMenus = menus[userRole] || []; // Get the corresponding menu array for the user role
 

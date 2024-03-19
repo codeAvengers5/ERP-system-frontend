@@ -37,7 +37,7 @@ export const deleteExistingJobPost = createAsyncThunk(
   async (jobId, thunkAPI) => {
     try {
       const response = await deleteJobPost(jobId);
-      return jobId;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }

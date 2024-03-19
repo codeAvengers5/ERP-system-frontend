@@ -12,12 +12,14 @@ import FormWrapper from "@/components/FormWrapper";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { validate } from "@/util/validate";
+import { useRouter } from "../../../../../node_modules/next/navigation";
 
 const initialState = {
   title: "",
   description: "",
   requirement: "",
   responsibility: "",
+  closingDate: "",
   salary: ""
 };
 
@@ -26,6 +28,7 @@ const Page = () => {
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
+  const router = useRouter();
   const { loading, success, error } = useSelector(state => state.jobPost);
   const [signupError, setSignupError] = useState("");
 
@@ -34,6 +37,7 @@ const Page = () => {
       toast.success("Job post created successfully");
       setJob(initialState);
       dispatch(clearStatus());
+      router.push("/hradmin/job_vacancy");
     }
     if (error) {
       toast.error(error);
@@ -64,7 +68,7 @@ const Page = () => {
       <Displaycard variant="card2">
         <FormWrapper
           onSubmit={handleSubmit}
-          className="flex flex-col gap-5 py-3 pl-3">
+          className="m-[20px] flex flex-col gap-5">
           <span className="text-center  text-meke-200">{signupError}</span>
           <div>
             <Text className="pb-[5px] md:pb-[10px]" content="Title_of_job" />
@@ -123,6 +127,20 @@ const Page = () => {
             {errors.responsibility && (
               <CustomErrorViewer isShow={true} text={errors.responsibility} />
             )}
+          </div>
+          <div>
+            <Text className="pb-[5px] md:pb-[10px]" content="Closing date" />
+            <InputField
+              type="date"
+              placeholder="Enter occupation of the employee"
+              name="closingDate"
+              value={job.closingDate}
+              onChange={onInputChange}
+            />
+            <CustomErrorViewer
+              isShow={errors.start_date != ""}
+              text={errors.start_date}
+            />
           </div>
           <div>
             <Text className="pb-[5px] md:pb-[10px]" content="Salary/Wage" />

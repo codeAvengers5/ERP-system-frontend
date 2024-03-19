@@ -1,8 +1,6 @@
 "use client";
 import axios from "axios";
-
-//import localStorage from "redux-persist/es/storage";
-import { setAuthToken } from "@/util/storage";
+import Cookies from "js-cookie";
 
 const API_URI = "http://localhost:8000";
 const register = formData => {
@@ -21,11 +19,9 @@ const login = async (email, password) => {
       password
     })
     .then(response => {
-      if (response.data.token) {
-        setAuthToken(
-          response.data.token,
-          JSON.stringify(response.data.userInfo)
-        );
+      if (response.data.userInfo) {
+        const encodedData = encodeURIComponent(JSON.stringify(response.data));
+        Cookies.set("user", encodedData);
       }
       return response.data;
     });

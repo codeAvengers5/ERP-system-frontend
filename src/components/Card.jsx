@@ -19,26 +19,27 @@ const Displaycard = ({
     };
   } else if (variant === "card2") {
     selectedProps = {
-      className: `${baseProps.className}  bg-meke-300 rounded-[1px] w-[300px] md:w-[580.38px] h-full md:h-[770px]`,
-      style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
+      className: `${baseProps.className}  bg-meke-300 rounded-[1px] w-[300px] md:w-[580.38px] h-full md:min-h-[770px]`,
+      style: { boxShadow: "0px 10px 40px 0px rgba(26, 104, 255, 0.13)" }
     };
   } else if (variant === "card3") {
     selectedProps = {
-      className: `${baseProps.className}  bg-white rounded-[16px] w-[300px] md:w-[517.54px] h-full md:h-[311.612px]`
+      className: `${baseProps.className}  bg-white rounded-[16px] w-[300px] md:w-[517.54px] h-full md:min-h-[311.612px]`
     };
   } else if (variant === "card4") {
     selectedProps = {
-      className: `${baseProps.className} bg-white rounded-[16px] w-[400px] md:w-4/5 h-[300px] md:h-[428px]`
+      className: `${baseProps.className} bg-white w-[300px] md:w-4/5 h-full md:min-h-[439px]`,
+      style: { boxShadow: "0px 10px 40px 0px rgba(26, 104, 255, 0.13)" }
     };
   } else if (variant === "card5") {
     selectedProps = {
-      className: `${baseProps.className} relative bg-meke-300 rounded-sm w-[300px] md:w-[580px] h-full md:h-[412px]`,
-      style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
+      className: `${baseProps.className} relative bg-meke-300 rounded-sm w-[300px] md:w-[580px] h-full md:min-h-[412px]`,
+      style: { boxShadow: "0px 10px 40px 0px rgba(26, 104, 255, 0.13)" }
     };
   } else if (variant === "card6") {
     selectedProps = {
-      className: `${baseProps.className}  bg-[#F8FCFF] w-[400px]  md:w-4/5 h-[100px] md:h-[339px]`,
-      style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
+      className: `${baseProps.className}  bg-[#F8FCFF] w-[400px]  md:w-4/5 h-[100px] md:min-h-[339px]`,
+      style: { boxShadow: "0px 10px 40px 0px rgba(26, 104, 255, 0.13)" }
     };
   } else if (variant === "card7") {
     selectedProps = {
@@ -49,7 +50,7 @@ const Displaycard = ({
       // width: "auto",
       // height: "auto",
       // className: ` bg-white`,
-      style: { boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }
+      style: { boxShadow: "0px 10px 40px 0px rgba(26, 104, 255, 0.13)" }
     };
   }
 
