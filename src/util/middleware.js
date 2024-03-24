@@ -1,22 +1,23 @@
 import { getTokenFromCookie } from "./cookie";
 import { decodeJwtToken } from "./decodetoken";
 import { isTokenExpired } from "./cookie";
+
+// Function to check if the user is authenticated and the token is not expired
 export function isAuthenticated() {
   const token = getTokenFromCookie();
   console.log("midtoken", token);
-  return !!token;
+  return !!token && !isTokenExpired(token);
 }
 
+// Function to get user information from the token
 export function getUserInfo() {
   const token = getTokenFromCookie();
   const decodedToken = decodeJwtToken(token);
 
   if (decodedToken) {
     const jsonString = decodedToken.split(";")[0];
-    const exp = decodedToken.split(",")[5];
     const decoded = JSON.parse(jsonString);
     console.log("miduser", decoded.userInfo);
-    console.log("this exp", exp);
     return decoded.userInfo;
   }
 
@@ -54,7 +55,7 @@ export function isManager() {
 // Middleware function to protect routes based on user roles
 export function protectRouteByRole(role, router) {
   return () => {
-    if (!isAuthenticated() || isTokenExpired(getTokenFromCookie())) {
+    if (!isAuthenticated()) {
       console.log("not authenticated");
       router.push("/");
     } else if (!roleCheck(role)) {
