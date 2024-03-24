@@ -1,7 +1,6 @@
 "use client";
 import axios from "axios";
-import Cookies from "js-cookie";
-
+import { setTokenCookie } from "@/util/cookie";
 const API_URI = "http://localhost:8000";
 const register = formData => {
   const config = {
@@ -20,8 +19,9 @@ const login = async (email, password) => {
     })
     .then(response => {
       if (response.data.userInfo) {
-        const encodedData = encodeURIComponent(JSON.stringify(response.data));
-        Cookies.set("user", encodedData);
+        console.log("login", response.data);
+        const token = JSON.stringify(response.data);
+        setTokenCookie(token);
       }
       return response.data;
     });
