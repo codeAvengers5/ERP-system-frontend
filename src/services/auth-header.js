@@ -14,7 +14,8 @@ export default function authHeader() {
     }
     return {
       Authorization: `Bearer ${decoded.token}`,
-      user: decoded
+      user: decoded,
+      "Content-Type": "multipart/form-data"
     };
   } else {
     return {};

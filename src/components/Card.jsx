@@ -15,7 +15,7 @@ const Displaycard = ({
 
   if (variant === "card1") {
     selectedProps = {
-      className: `${baseProps.className}  bg-[#F0F9FF]  min-w-[300px] md:w-5/6 min-h-[500px]`
+      className: `${baseProps.className}  bg-[#F0F9FF]  min-w-[300px] md:w-5/6 min-h-[413px]`
     };
   } else if (variant === "card2") {
     selectedProps = {
