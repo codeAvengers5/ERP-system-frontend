@@ -1,12 +1,22 @@
-import Cookies from "js-cookie";
-
+import { decodeJwtToken } from "@/util/decodetoken";
+import { getTokenFromCookie } from "@/util/cookie";
 export default function authHeader() {
-  const userCookie = Cookies.get("user");
-  const decodedCookie = decodeURIComponent(userCookie);
-  const user = JSON.parse(decodedCookie);
-  if (user && user.token) {
-    return { Authorization: "Bearer " + user.token, user: user };
+  const token = getTokenFromCookie();
+  if (token) {
+    const decodedToken = decodeJwtToken(token);
+    const jsonString = decodedToken.split(";")[0];
+    const decoded = JSON.parse(jsonString);
+    console.log("auth", decoded.token);
+    const realtoken = decoded.token;
+    if (!realtoken) {
+      console.log("notoken");
+      return {};
+    }
+    return {
+      Authorization: `Bearer ${decoded.token}`,
+      user: decoded
+    };
   } else {
-    return;
+    return {};
   }
 }
