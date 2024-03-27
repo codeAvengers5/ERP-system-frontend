@@ -137,7 +137,7 @@ const promoSlice = createSlice({
         state.loading = false;
         state.data = payload;
       })
-      .addCase(fetchPromoData.rejected, (state, action ) => {
+      .addCase(fetchPromoData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message; // Setting the error message on data fetch failure
       });

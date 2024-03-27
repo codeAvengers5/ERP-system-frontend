@@ -59,7 +59,7 @@ const page = () => {
     for (const [key, file] of promo.images.entries()) {
       formData.append(key, file);
     }
-    dispatch(createPromo(formData))
+    dispatch(createPromo(formData));
   };
 
   useEffect(() => {
@@ -78,18 +78,17 @@ const page = () => {
 
   return (
     <div className="flex justify-center">
-       <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={2000}
         className="absolute  right-0 top-0 mt-20 w-[40px]  max-w-sm p-4"
       />
       <Displaycard variant="card2">
-        <FormWrapper className="flex flex-col max-w-full gap-y-[20px] p-4" onSubmit={handleSubmit}>
+        <FormWrapper
+          className="flex max-w-full flex-col gap-y-[20px] p-4"
+          onSubmit={handleSubmit}>
           <div>
-            <Text
-              className="pb-[5px] md:pb-[10px]"
-              content="Title"
-            />
+            <Text className="pb-[5px] md:pb-[10px]" content="Title" />
             <InputField
               type="text"
               placeholder="Enter title for promotion"
@@ -110,10 +109,7 @@ const page = () => {
             />
           </div>
           <div className="w-[250px] md:w-[550px]">
-            <Text
-              className="pb-[5px] md:pb-[10px]"
-              content="Image"
-            />
+            <Text className="pb-[5px] md:pb-[10px]" content="Image" />
             <div className="flex w-full items-center rounded border-2 border-br_primary bg-bg_primary px-2 py-2 hover:bg-bt_primary hover:opacity-[25%] md:px-4">
               <input
                 type="file"
@@ -156,7 +152,7 @@ const page = () => {
           </div>
           <div className="col-span-1 md:col-span-2">
             <Button color="bt_primary" type="submit" disabled={loading}>
-            {loading ? "Adding..." : " Add Promotion"}
+              {loading ? "Adding..." : " Add Promotion"}
             </Button>
           </div>
         </FormWrapper>

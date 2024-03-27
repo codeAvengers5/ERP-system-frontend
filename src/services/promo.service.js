@@ -13,7 +13,7 @@ const createPromo = formData => {
 };
 
 const updatePromo = ({ id, formData }) => {
-  console.log('on promo service',formData)
+  console.log("on promo service", formData);
   return axios.put(API_URI + `/updatePromotionById/${id}`, formData, {
     headers: authHeader()
   });

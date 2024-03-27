@@ -45,7 +45,6 @@ const page = () => {
       };
       fetchPromoPost();
     }
-
   }, [id]);
 
   // for (const image of promo.images) {
@@ -57,7 +56,12 @@ const page = () => {
   for (const [key, value] of promo.images.entries()) {
     // console.log('the key', key, value);
     imageElements.push(
-      <img key={key} src={value.url} alt={`Image ${key}`}  className="h-[135px] w-[140px]"/>
+      <img
+        key={key}
+        src={value.url}
+        alt={`Image ${key}`}
+        className="h-[135px] w-[140px]"
+      />
     );
   }
 
@@ -73,7 +77,7 @@ const page = () => {
     // }
     promo.images = new FormData();
     Array.from(files).forEach(file => {
-      console.log('file',file);
+      console.log("file", file);
       promo.images.append("images", file);
     });
     for (const [key, value] of promo.images.entries()) {
@@ -102,7 +106,7 @@ const page = () => {
       // console.log('it is',key, file);
       formData.append(key, file);
     }
-    console.log('the data', formData)
+    console.log("the data", formData);
     if (id) {
       const promoData = {
         formData,
@@ -131,7 +135,7 @@ const page = () => {
 
   return (
     <div className="flex justify-center">
-       <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={2000}
         className="absolute  right-0 top-0 mt-20 w-[40px]  max-w-sm p-4"
@@ -150,12 +154,11 @@ const page = () => {
         )}
       </div> */}
       <Displaycard variant="card2">
-        <FormWrapper className="flex flex-col max-w-full gap-y-[20px] p-4" onSubmit={handleSubmit}>
+        <FormWrapper
+          className="flex max-w-full flex-col gap-y-[20px] p-4"
+          onSubmit={handleSubmit}>
           <div>
-            <Text
-              className="pb-[5px] md:pb-[10px]"
-              content="Title"
-            />
+            <Text className="pb-[5px] md:pb-[10px]" content="Title" />
             <InputField
               type="text"
               placeholder="Enter title for promotion"
@@ -176,10 +179,7 @@ const page = () => {
             />
           </div>
           <div className="w-[250px] md:w-[550px]">
-            <Text
-              className="pb-[5px] md:pb-[10px]"
-              content="Image"
-            />
+            <Text className="pb-[5px] md:pb-[10px]" content="Image" />
             <div className="flex w-full items-center rounded border-2 border-br_primary bg-bg_primary px-2 py-2 hover:bg-bt_primary hover:opacity-[25%] md:px-4">
               <input
                 type="file"
@@ -202,7 +202,7 @@ const page = () => {
               </label>
             </div>
             <div className="mt-[15px] flex flex-col items-center justify-center gap-[15px] md:flex-row md:gap-[30px]">
-            {imagebox ? (
+              {imagebox ? (
                 selectedFiles.map((file, index) => (
                   <img
                     key={index}
@@ -212,20 +212,19 @@ const page = () => {
                     className="h-[67px] w-[70px] object-cover md:h-[135px] md:w-[140px]"
                   />
                 ))
-              ): 
-              promo.images ?
-              <>{imageElements}</>:
+              ) : promo.images ? (
+                <>{imageElements}</>
+              ) : (
                 <>
                   <div className="h-[135px] w-[140px] bg-meke-600" />
                   <div className="h-[135px] w-[140px] bg-meke-600" />
                 </>
-
-              }
+              )}
             </div>
           </div>
           <div className="col-span-1 md:col-span-2">
-          <Button color="bt_primary" type="submit" disabled={loading}>
-            {loading ? "Adding..." : " Add Promotion"}
+            <Button color="bt_primary" type="submit" disabled={loading}>
+              {loading ? "Adding..." : " Add Promotion"}
             </Button>
           </div>
         </FormWrapper>

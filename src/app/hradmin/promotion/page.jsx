@@ -71,92 +71,101 @@ const page = () => {
 
   return (
     <div className="lg:ml-12">
-       {data &&
-      <>
-      <div className="mb-20 mr-[50px] mt-6 hidden flex-row justify-end gap-2 md:flex">
-        <Button color="meke-550" style={buttonStyle}>
-          <div className=" flex  items-center justify-center gap-[39px] px-[25px]">
-            <div className="h-6 w-6">
-              <Image src={filter} alt="filter" />
-            </div>
-            <p className="font-['Roboto'] text-base font-normal text-black text-opacity-25">
-              Filter
-            </p>
-          </div>
-        </Button>
-        <Link href="/hradmin/promotion/addpromotion">
-          <Button color="bt_primary" style={{ width: "300px", height: "60px" }}>
-            <div className=" flex  items-center justify-center gap-[39px] px-[15px]">
-              <div className="h-6 w-6">
-                {" "}
-                <Image src={plus} alt="plus" />
-              </div>
-              <div className="font-['Roboto'] text-xl font-normal text-white">
-                Add Poromotion
-              </div>
-            </div>
-          </Button>
-        </Link>
-      </div>
-      <div className="mr-[25px] mt-6 flex justify-end gap-2 pl-4 md:hidden">
-        <Button size="small" color="meke-550" style={buttonStyle2}>
-          <Image src={plus} alt="plus" />
-        </Button>
-      </div>
-      <div className="flex flex-col gap-[30px]">
-      {data.map(promo => (
-        <Displaycard variant="card1" margin="10px" key={promo._id}>
-          <div className="px-[20px] flex flex-col p-5 md:px-[50px] min-w-[1000px]">
-            <div className="flex flex-col pb-[50px]">
-              <div className="flex flex-col items-center justify-between p-5 md:flex-row ">
-                <div className="font-primary text-base font-bold text-black md:text-heading_1">
-                  {promo.title}
+      {data && (
+        <>
+          <div className="mb-20 mr-[50px] mt-6 hidden flex-row justify-end gap-2 md:flex">
+            <Button color="meke-550" style={buttonStyle}>
+              <div className=" flex  items-center justify-center gap-[39px] px-[25px]">
+                <div className="h-6 w-6">
+                  <Image src={filter} alt="filter" />
                 </div>
-                <div className="font-primary text-base font-normal text-black md:text-heading_2">
-                  {/* Date: {moment(promo.data).format("MMMM Do, YYYY")} */}
+                <p className="font-['Roboto'] text-base font-normal text-black text-opacity-25">
+                  Filter
+                </p>
+              </div>
+            </Button>
+            <Link href="/hradmin/promotion/addpromotion">
+              <Button
+                color="bt_primary"
+                style={{ width: "300px", height: "60px" }}>
+                <div className=" flex  items-center justify-center gap-[39px] px-[15px]">
+                  <div className="h-6 w-6">
+                    {" "}
+                    <Image src={plus} alt="plus" />
+                  </div>
+                  <div className="font-['Roboto'] text-xl font-normal text-white">
+                    Add Poromotion
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex flex-shrink-0 flex-row flex-wrap gap-2">
-                {promo.images.map(image => (
-                  <img src={`${image.url}`} width={132} height={155} alt="image" key={image.id}/>
-                ))}
-              </div>
-            </div>
-
-            <div className=" h-auto w-full font-['Roboto'] text-base font-normal leading-tight text-black sm:w-auto md:text-heading_2">
-              {promo.description}
-            </div>
-          </div>
-          <div className="px-[20px] mb-[5px] flex flex-row justify-end gap-5 md:px-[50px] md:mb-[10px]">
-            <Link
-              href={`/hradmin/promotion/addpromotion/${promo._id}`}
-              className="flex min-w-[100px] cursor-pointer gap-[5px]">
-              <button>
-                <RiEditFill size={24} className="text-bt_additional" />
-              </button>
-              <p className="font-primary text-base font-normal text-black text-opacity-25">
-                Edit
-              </p>
+              </Button>
             </Link>
-            <button
-              onClick={() => handlePromoDelete(promo._id)}
-              className="flex min-w-[100px] gap-[5px]">
-              <MdDelete size={24} className="rounded text-bt_tertiary" />
-              <p className="font-primary text-base font-normal text-black text-opacity-25">
-                Delete
-              </p>
-            </button>
           </div>
-        </Displaycard>
-      ))}
-      </div>
-      <DeleteConfirmationModal
-        show={showConfirmationModal}
-        onClose={cancelDeletePromoPost}
-        onConfirm={confirmDeletePromoPost}
-      />
-      </>}
+          <div className="mr-[25px] mt-6 flex justify-end gap-2 pl-4 md:hidden">
+            <Button size="small" color="meke-550" style={buttonStyle2}>
+              <Image src={plus} alt="plus" />
+            </Button>
+          </div>
+          <div className="flex flex-col gap-[30px]">
+            {data.map(promo => (
+              <Displaycard variant="card1" margin="10px" key={promo._id}>
+                <div className="flex min-w-[1000px] flex-col p-5 px-[20px] md:px-[50px]">
+                  <div className="flex flex-col pb-[50px]">
+                    <div className="flex flex-col items-center justify-between p-5 md:flex-row ">
+                      <div className="font-primary text-base font-bold text-black md:text-heading_1">
+                        {promo.title}
+                      </div>
+                      <div className="font-primary text-base font-normal text-black md:text-heading_2">
+                        {/* Date: {moment(promo.data).format("MMMM Do, YYYY")} */}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-shrink-0 flex-row flex-wrap gap-2">
+                      {promo.images.map(image => (
+                        <img
+                          src={`${image.url}`}
+                          width={132}
+                          height={155}
+                          alt="image"
+                          key={image.id}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className=" h-auto w-full font-['Roboto'] text-base font-normal leading-tight text-black sm:w-auto md:text-heading_2">
+                    {promo.description}
+                  </div>
+                </div>
+                <div className="mb-[5px] flex flex-row justify-end gap-5 px-[20px] md:mb-[10px] md:px-[50px]">
+                  <Link
+                    href={`/hradmin/promotion/addpromotion/${promo._id}`}
+                    className="flex min-w-[100px] cursor-pointer gap-[5px]">
+                    <button>
+                      <RiEditFill size={24} className="text-bt_additional" />
+                    </button>
+                    <p className="font-primary text-base font-normal text-black text-opacity-25">
+                      Edit
+                    </p>
+                  </Link>
+                  <button
+                    onClick={() => handlePromoDelete(promo._id)}
+                    className="flex min-w-[100px] gap-[5px]">
+                    <MdDelete size={24} className="rounded text-bt_tertiary" />
+                    <p className="font-primary text-base font-normal text-black text-opacity-25">
+                      Delete
+                    </p>
+                  </button>
+                </div>
+              </Displaycard>
+            ))}
+          </div>
+          <DeleteConfirmationModal
+            show={showConfirmationModal}
+            onClose={cancelDeletePromoPost}
+            onConfirm={confirmDeletePromoPost}
+          />
+        </>
+      )}
       <ToastContainer
         position="top-right"
         autoClose={2000}
