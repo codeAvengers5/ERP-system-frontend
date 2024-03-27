@@ -77,7 +77,7 @@ const JobPage = () => {
         className="absolute  right-0 top-0 mt-20 w-[40px]  max-w-sm p-4"
       />
       <div className="mb-20 mr-[50px] mt-6 hidden flex-row justify-end gap-2 md:flex">
-        <Button color="meke-550" style={buttonStyle}>
+        <Button variant="filter" style={buttonStyle}>
           <div className=" flex  items-center justify-center gap-[39px] px-[25px]">
             <div className="h-6 w-6">
               <Image src={filter} alt="filter" />
@@ -102,7 +102,7 @@ const JobPage = () => {
         </Button>
       </div>
       <div className="mr-[25px] mt-6 flex justify-end gap-2 pl-4 md:hidden">
-        <Button size="small" color="meke-550" style={buttonStyle2}>
+        <Button size="small" variant="filter" style={buttonStyle2}>
           <Image src={filter} alt="filter" />
         </Button>
         <Link href="/hradmin/job_vacancy/jobpost">

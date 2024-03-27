@@ -11,10 +11,10 @@ const DeleteConfirmationModal = ({ show, onClose, onConfirm }) => {
           Are you sure you want to delete this item?
         </p>
         <div className="ml-48 mt-10 flex h-[40px] w-[100px] flex-row items-center gap-[30px]">
-          <Button color="bt_additional" size="large" onClick={onConfirm}>
+          <Button variant="success" size="large" onClick={onConfirm}>
             Confirm
           </Button>
-          <Button color="bt_tertiary" size="large" onClick={onClose}>
+          <Button variant="error" size="large" onClick={onClose}>
             Cancel
           </Button>
         </div>
