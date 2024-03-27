@@ -52,7 +52,7 @@ const page = () => {
         />
         <div>
           <div className="mr-[50px] hidden flex-row justify-end gap-[20px] md:flex">
-            <Button color="meke-550" style={buttonStyle}>
+            <Button cvariant="filter" style={buttonStyle}>
               <div className=" flex  items-center justify-center gap-[39px] px-[25px]">
                 <div className="h-6 w-6">
                   <Image src={filter} alt="filter" />
@@ -79,7 +79,7 @@ const page = () => {
             </Link>
           </div>
           <div className="mr-[25px] mt-6 flex justify-end gap-2 pl-4 md:hidden">
-            <Button size="small" color="meke-550" style={buttonStyle2}>
+            <Button size="small" variant="filter" style={buttonStyle2}>
               <Image src={filter} alt="filter" />
             </Button>
             <Button size="small" color="bt_primary" style={buttonStyle2}>
