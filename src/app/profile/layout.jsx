@@ -1,23 +1,60 @@
-/* eslint-disable import/no-unresolved */
-// eslint-disable-next-line import/no-unresolved
+"use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import ReduxProvider from "@/store/ReduxProvider";
+import {
+  isAuthenticated,
+  protectRouteByRole,
+  isManager
+} from "@/util/middleware";
+import { ActivityIndicator } from "@/components/Activity_indicator";
 
 export default function DashboardLayout({ children }) {
-  return (
-    <ReduxProvider>
-      <section>
-        <div className="flex h-screen overflow-hidden">
-          <Sidebar />
-          <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-            <Navbar />
-            <main>
-              <div className="mt-[10px]">{children}</div>
-            </main>
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      setIsLoading(true); // Start loading
+
+      if (!isAuthenticated()) {
+        router.push("/");
+      }
+
+      setIsLoading(false); // Stop loading
+    };
+
+    checkAuthentication();
+  }, [router]);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <ActivityIndicator />
+      </div>
+    );
+  }
+
+  if (!isLoading && isAuthenticated()) {
+    return (
+      <ReduxProvider>
+        <section>
+          <div className="flex bg-[#F5F8FA]">
+            <Sidebar />
+            <div className="flex-0 flex w-[100dvw] flex-col">
+              <Navbar />
+              <main>
+                <div className="relative overflow-y-auto">{children}</div>
+              </main>
+            </div>
           </div>
-        </div>
-      </section>
-    </ReduxProvider>
-  );
+        </section>
+      </ReduxProvider>
+    );
+  }
+
+  // If not loading and user is not authenticated, do not render anything
+  return null;
 }
